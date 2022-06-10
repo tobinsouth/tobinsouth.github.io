@@ -1,0 +1,3 @@
+Inspired by the work of the work of Holden Karnofsky in [Cold Takes and Cold Takes Audio](https://www.cold-takes.com); this is a initial attempt to create a blog for the purpose of learning things myself, but doing so out in the open. I expect there to be ~~errors~~ mistakes, but I'll try my best and learn along the way.
+
+I think I will title it **Nuts and Beans**, named after my two favourite foods, and the two foods most closely associated with my hometown.
