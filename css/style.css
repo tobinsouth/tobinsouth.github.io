@@ -14,13 +14,13 @@ h2,h1{
 }
 
 a{
-    color: #A31F34;
+    color: #b3b3b3;
     /*outline: none;*/
     text-decoration: none;
     display: inline;
 }
 a:hover{ 
-    color: #b3b3b3;
+    color: #A31F34;
 }
 
  /*For the little link icons */
