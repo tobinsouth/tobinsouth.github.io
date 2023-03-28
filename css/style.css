@@ -36,8 +36,6 @@ a:hover{
 .btn{
     background-color: #b3b3b3;
     border-radius: 12px;
-    padding: 8px 12px;
-    margin: 10px;
 }
 .btn:hover{ 
     color: #b3b3b3;
@@ -58,20 +56,38 @@ a:hover{
 
 /*Cards*/
 .card{
-    card-height: 100%;
     background-color: #b3b3b3;
     border-radius: 12px;
-    margin: 12px 12px;
     color: #1b1a1a;
     /*min-height: 400px;*/
 }
 .card-img-top {
     width: 100%;
-    height: 15vw;
+    height: 15rem;
     object-fit: cover;
     border-radius: 12px;
     margin: 0px;
 }
+.card-text {
+    height: 100px;
+    overflow-y: auto;
+  }
+
+.card-text::-webkit-scrollbar {
+width: 8px;
+background-color: #b3b3b3; /* Match the card's background color */
+}
+
+.card-text::-webkit-scrollbar-thumb {
+background-color: #A31F34; /* Scrollbar thumb color */
+border-radius: 4px;
+}
+
+.card-text::-webkit-scrollbar-track {
+background-color: #b3b3b3; /* Match the card's background color */
+border-radius: 4px;
+}
+
 
 /*New Appearance Lists*/
 .list-group-item{
