@@ -27,6 +27,14 @@
             color: #3B82F6;
         }
     </style>
+    <!-- To avoid email scrapers, we use this. -->
+    <script>
+        const emailContainer = document.getElementById('email-container');
+        const emailName = '&#114;&#109;&#97;&#104;&#97;&#114;&#105;';
+        const emailDomain = '&#109;&#105;&#116;&#46;&#101;&#100;&#117;';
+        const emailLink = `<a href="mailto:${emailName}@${emailDomain}" class="blue-primary">${emailName}@${emailDomain}</a>`;
+        emailContainer.innerHTML = emailLink;
+    </script>
 </head>
 
 <body class="bg-white">
@@ -44,6 +52,7 @@
                     <a href="https://scholar.google.com/citations?user=3qM8lPsAAAAJ&hl=en" target="_blank"
                         rel="noopener noreferrer"><i class="ai ai-google-scholar"></i></a>
                 </div>
+                <div id="email-container" class="text-lg navy"></div> <!-- Email container to avoid email scrapers -->
                 <p class="text-lg font-semibold blue-primary mt-2 flex justify-center items-center">
                     <i class="fas fa-map-marker-alt mr-2"></i>Boston, Massachusetts
                 </p>
@@ -135,7 +144,6 @@
             </div>
         </div>
     </div>
-
 </body>
 <footer class="bg-blue-100 mt-8 py-4 text-center">
     <p class="text-base navy">Made from scratch with ChatGPT and Tobin &lt;3</p>
