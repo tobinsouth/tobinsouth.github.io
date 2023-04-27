@@ -27,14 +27,6 @@
             color: #3B82F6;
         }
     </style>
-    <!-- To avoid email scrapers, we use this. -->
-    <script>
-        const emailContainer = document.getElementById('email-container');
-        const emailName = '&#114;&#109;&#97;&#104;&#97;&#114;&#105;';
-        const emailDomain = '&#109;&#105;&#116;&#46;&#101;&#100;&#117;';
-        const emailLink = `<a href="mailto:${emailName}@${emailDomain}" class="blue-primary">${emailName}@${emailDomain}</a>`;
-        emailContainer.innerHTML = emailLink;
-    </script>
 </head>
 
 <body class="bg-white">
@@ -144,6 +136,14 @@
             </div>
         </div>
     </div>
+    <!-- To avoid email scrapers, we use this. -->
+    <script>
+        const emailContainer = document.getElementById('email-container');
+        const emailName = '&#114;&#109;&#97;&#104;&#97;&#114;&#105;';
+        const emailDomain = '&#109;&#105;&#116;&#46;&#101;&#100;&#117;';
+        const emailLink = `<a href="mailto:${emailName}@${emailDomain}" class="blue-primary">${emailName}@${emailDomain}</a>`;
+        emailContainer.innerHTML = emailLink;
+    </script>
 </body>
 <footer class="bg-blue-100 mt-8 py-4 text-center">
     <p class="text-base navy">Made from scratch with ChatGPT and Tobin &lt;3</p>
