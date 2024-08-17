@@ -1,75 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name=”robots” content=”noindex,nofollow”>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/academicons.css" />
-    <title>Tobin South: Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tobin's Personal Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFDFE;
+            color: #1E1F24;
+        }
+        
+        .font-serif {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        @keyframes bounce-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-10px); }
+        }
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150185589-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'UA-150185589-1');
-    </script>
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            animation: bounce-right 1.5s ease-in-out 1s;
+        }
+
+         .scroll-cue {
+            text-align: right;
+            color: #999;
+            font-size: 14px;
+            margin-top: 0px;
+            font-style: italic;
+        }
+
+        .card {
+            flex: 0 0 auto;
+            width: 20rem; /* equivalent to w-80 */
+            height: 12rem; /* equivalent to h-48 */
+            border-radius: 0.5rem; /* equivalent to rounded-lg */
+            background-color: #E0E1E6;
+            /* background-color: #fcfcfc; */
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #2563eb;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1E1F24;
+        }
+
+        .card:before {
+            background: linear-gradient(45deg, #2563eb, #10b981, #2563eb);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            /* transition: transform 0.1s, box-shadow 0.1s; */
+        }
+
+        /* .work-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 300px;
+            height: 300px;
+            aspect-ratio: 1/1;
+        }
+
+        .work-card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .work-card-description {
+            font-size: 0.9rem;
+            color: #5a6c7d;
+        } */
+
+        /* @media (min-width: 768px) {
+            .work-card-title {
+                font-size: 1.5rem;
+            }
+            .work-card-description {
+                font-size: 1rem;
+            }
+        } */
+
+        .news-card {
+            position: relative;
+            width: 20rem; /* equivalent to w-80 */
+            height: 12rem; /* equivalent to h-48 */
+            border-radius: 0.5rem; /* equivalent to rounded-lg */
+            overflow: hidden;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.2s;
+        }
+
+        .news-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .news-card h3 {
+            font-size: 1.25rem; /* equivalent to text-xl */
+            font-weight: 600; /* equivalent to font-semibold */
+           
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            /* transition: transform 0.1s, box-shadow 0.1s; */
+        }
+
+        .news-card-text {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            color: white;
+            padding: 1rem;
+            padding-right: 2rem;
+            z-index: 10;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #2563eb;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<div class="row"  style="padding-top: 100px; padding-bottom: 100px">
-    <div class="col text-center">
-        <div class="row" >
-            <img class="rounded mx-auto float-end" src="images/MeExplainingToTom.jpeg" alt = "Me" style="max-width: 200px;">
-        </div>
-        <h1 style="margin: 20px;">Tobin South</h1>
+    <div class="container mx-auto px-4 max-w-5xl">
+        <!-- Section 0: Title -->
+        <section class="flex flex-col md:flex-row items-center text-center justify-center pt-10 md:pt-30 ">
+            <div class="">
+                <h1 class="text-4xl md:text-7xl font-bold my-4 md:my-8 text-blue-600 font-serif"><span id="gday-trigger" class="cursor-pointer">G'day</span>, I'm Tobin</h1>
+                <div class="text-xl md:text-3xl">
+                    <p class="mb-4">MIT PhD Candidate, 🇦🇺🇺🇸 Fulbrighter</p>
+                    <div class="flex items-center space-x-4 justify-center text-3xl md:text-4xl">
+                        <a href="https://github.com/tobinsouth"><i class="fab fa-github"></i></a>
+                        <a href="https://twitter.com/tobinsouth"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/tobinsouth/"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://scholar.google.com/citations?user=r5pPBFMAAAAJ&hl=en"><i class="ai ai-google-scholar-square"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        If you want to add me on something, there's probably a link here.
-        <br/>
-        <br/>
-        <div>
-            <a href="https://www.facebook.com/tobin.south"><i class="fab fa-facebook icon"></i></a> 
-            &nbsp
-            <a href="https://www.instagram.com/tobin.south/"><i class="fab fa-instagram icon"></i></a> 
-            &nbsp
-            <a href="https://www.linkedin.com/in/tobin-south/"><i class="fab fa-linkedin icon"></i></a>
-            &nbsp
-            <a href="https://twitter.com/TobinSouth"><i class="fab fa-twitter icon"></i></a> 
-            &nbsp
-            <a href="https://wa.me/16173869664"><i class="fab fa-whatsapp icon"></i></a> 
-            &nbsp
-            <a href="https://t.me/tobinsouth"><i class="fab fa-telegram icon"></i></a> 
-            &nbsp
-            <a href="https://github.com/tobinsouth"><i class="fab fa-github icon"></i></a> 
-            <br/>
-            <br/>
-            Or you can text me on +1 (617) 38six 966four. #norobocalls
-            <br/>
-            <br/>
-            When I end up ignoring messages just email me:
-            <!-- nothisemailaddress@mit.edu -->
-            <a href="mailto:tsouth&commat;mit&period;edu">
-            <!-- <i class="fas fa-envelope icon"></i> -->
-            tsouth&commat;mit&period;edu
-        </a>
-        <br/>
-        <br/>
-        <br/>
-        <div class="row" >
-            <img class="rounded mx-auto float-end" src="images/QRlink.png" alt = "Me" style="max-width: 200px;">
-        </div>
-        This is a QR code that links to this page. Meta.
-        </div>
-        <br/>
-        <br/>
-        <br/>
+        <!-- Section 1: Intro -->
+        <section class="flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0 py-10 md:py-10">
+            <div class="w-full md:w-1/2 flex justify-center md:mt-0">
+                <div class="">
+                    <img src="images/Tobin 2024 Face.jpg" alt="Tobin's Main Profile Photo" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover">
+                </div>
+            </div>
+            <div class="md:w-1/2 mb-10 md:mb-0 text-lg flex flex-col gap-4">
+                <div class="text-center md:text-left">
+                <h2 class="text-2xl md:text-3xl font-bold font-serif text-blue-600">Security + AI + Society</h2></div>
+                <p>
+                    Tobin is a senior PhD candidate at MIT on a <a href="https://invest.sa.gov.au/articles/sa-student-wins-place-at-mit-and-fulbright-scholarship">Fulbright Future Scholarship</a>,
+                    advised by <a href="https://en.wikipedia.org/wiki/Alex_Pentland">Sandy Pentland</a> at the <a href="https://www.media.mit.edu/research/?filter=groups">MIT Media Lab</a>. Tobin's research is focused on building privacy, verifiability, and regulatory compliance into frontier AI from first principles.
+                </p>
+                <p>
+                    Tobin's work is at the intersection of security, AI, and society, spanning across fields from private data sharing to verifiable evaluations for large AI models. He has contributed to recent work on regulation of generative AI and is keenly interested in working on practically deployable solutions to solve privacy and security challenges in a changing world of technology.
+                </p>    
+            </div>
+        </section>
+
+        <!-- Section 2: About Me -->
+        <section class="flex flex-col md:flex-row items-start justify-between  space-y-10 md:space-y-0 md:space-x-12 md:py-10">
+            <div class="w-full md:w-1/2 text-lg flex flex-col gap-4">
+                <p>
+                    <b class="text-blue-600">About Me:</b> I have a fellowship with the <a href="https://www.e14.vc/">E14 VC fund</a>, helping with AI investments, and previously founded a startup (which failed, great learning experience!). 
+                    I have a non-executive role on the board of the <a href="https://dti.sa.gov.au/mit-bigdata-living-lab">MIT bigdata Living Lab</a> in Adelaide and sit on the Graduate Student Council at MIT.
+                    In my undergraduate, I was Valedictorian of the graduating class of Mathematics, Computer Science, and Electrical Engineering.
+                </p>
+                <p>            
+                    Before all that, I grew up in the <a href="https://www.google.com/search?q=%22Peanut+capital+of+Australia%22">"Peanut capital of Australia"</a>, 
+                    the agricultural town of <a href="https://www.google.com/maps/place/Kingaroy+QLD+4610">Kingaroy, Queensland</a>; but I consider Adelaide my real home. 
+                    Don't hesitate to reach out if you have something interesting to talk about. 
+                </p>
+            </div>
+            <div class="w-full md:w-1/2">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <video autoplay loop muted class="w-full rounded-lg shadow-lg">
+                            <source src="images/shorttobin_no_audio_compressed.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div>
+                        <img src="images/tobin_workshop.jpg" alt="Description 1" class="w-full h-40 object-cover rounded-lg shadow-lg">
+                    </div>
+                    <div>
+                        <img src="images/Tobin_dramatic_square.jpg" alt="Description 2" class="w-full h-40 object-cover rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Recent Work -->
+        <section class="py-10">
+            <h2 class="text-3xl font-bold">Some Recent Work</h2>
+            <div class="carousel"> 
+                <!-- <a href="https://mit-genai.pubpub.org/pub/m4msmss4" class="card">
+                    <h3>End-to-end security for GenAI</h3>
+                    <p class="work-card-description">Explore our approach to comprehensive GenAI security.</p>
+                </a> -->
+                <a href="https://arxiv.org/abs/2402.02675" class="card">
+                    <h3>Verifiable Model Evaluations</h3>
+                    <p class="work-card-description">Discover our methods for ensuring AI model integrity.</p>
+                </a>
+                <a href="https://arxiv.org/abs/2311.12955" class="card">
+                    <h3>Private Retrieval Augmented Generation</h3>
+                    <p class="work-card-description">Learn about our innovative RAG techniques.</p>
+                </a>
+                <a href="https://cdn.governance.ai/Open_Problems_in_Technical_AI_Governance.pdf" class="card">
+                    <h3>Open Problems in Technical AI Governance</h3>
+                    <p class="work-card-description">Explore key challenges in AI governance.</p>
+                </a>
+                <a href="https://arxiv.org/pdf/2408.07892" class="card">
+                    <h3>Personhood Credentials</h3>
+                    <p class="work-card-description">Learn about our work on protecting digital spaces.</p>
+                </a>
+                <a href="https://www.networklawreview.org/computational-three" class="card">
+                    <h3>Transparency by Design for LLMs</h3>
+                    <p class="work-card-description">Understanding how RAG can provide auditability and updateability for LLMs.</p>
+                </a>
+                <a href="https://arxiv.org/abs/2311.13008" class="card">
+                    <h3>Zero-knowledge tax disclosures</h3>
+                    <p class="work-card-description">Discover our research on privacy-preserving financial disclosures.</p>
+                </a>
+                <a href="https://www.dataprovenance.org/Consent_in_Crisis.pdf" class="card">
+                    <h3>Decline of the AI Data Commons</h3>
+                    <p class="work-card-description">Explore our research on the changing landscape of AI data.</p>
+                </a>
+                <a href="https://mit-genai.pubpub.org/pub/uk7op8zs/release/2" class="card">
+                    <h3>Data Consent and Provenance are Broken</h3>
+                    <p class="work-card-description">Discover the challenges in AI data management.</p>
+                </a>
+                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4688040" class="card">
+                    <h3>Plural Management</h3>
+                    <p class="work-card-description">A management system for open-source teams that naturally distributed management and ownership over time.</p>
+                </a>
+            </div>
+            <div class="scroll-cue">Scroll for more <span class="arrow">➜</span></div>
+        </section>
+
+        <!-- Section 4: News -->
+        <section class="">
+            <h2 class="text-3xl font-bold">News Stories & Talks</h2>
+            <div class="carousel">
+                <a href="https://news.mit.edu/2024/3-questions-proving-humanity-online-0816" class="news-card" style="background-image: url('images/media/MIT-3Q-personhood-01-press_0.jpg');">
+                    <div class="news-card-text">
+                        <h4>MIT News</h4>
+                        <h3>Privacy and Personhood online with future AI</h3>
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=zfU5P-aeYaw" class="news-card" style="background-image: url('images/media/TEDx\ Screenshot.png');">
+                    <div class="news-card-text">
+                        <h4>TEDx Boston</h4>
+                        <h3>Reimagining ​security for AI</h3>
+                    </div>
+                </a>
+                <a href="https://www.adelaide.edu.au/alumni/news/list/2024/08/06/tobin-south" class="news-card" style="background-image: url('images/media/dsc03613-resize.jpg');">
+                    <div class="news-card-text">
+                        <h4>Adelaide Alumni Interview</h4>
+                        <h3>A journey to MIT</h3>
+                    </div>
+                </a>
+                <a href="https://www.adelaidenow.com.au/news/future-adelaide/future-bright-sa-data-scientist-awarded-scholarship-to-study-at-mit-in-massachusetts/news-story/3e13c7d19ac17cdda1fb8b5b16257e61" class="news-card" style="background-image: url('images/media/2d0e8b13a8e679d2960c4b61ba7b87a5.jpg');">
+                    <div class="news-card-text">
+                        <h4>The Advertiser</h4>
+                        <h3>Southern Star</h3>
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=vvobGVBTDRY" class="news-card" style="background-image: url('images/media/1da4e2be88faeb7ab0a828a57dc06236.webp');">
+                    <div class="news-card-text">
+                        <h4>Seminar Talk</h4>
+                        <h3>The Future of Data Science with LLMs</h3>
+                    </div>
+                </a>
+                <a href="https://www.nytimes.com/2024/07/19/technology/ai-data-restrictions.html" class="news-card" style="background-image: url('images/media/20roose-superJumbo.webp');">
+                    <div class="news-card-text">
+                        <h4>New York Times</h4>
+                        <h3>AI Data Restrictions</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="scroll-cue">Scroll for more <span class="arrow">➜</span></div>
+        </section>
+
+        <!-- Life Updates -->
+        <section>
+            <h2 class="text-3xl font-bold mb-5">Life Updates</h2>
+            <ul class="space-y-2">
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, Aug</span>
+                    <span class="ml-4">Contributed to a large project on personhood credentials with collaborators from OpenAI, Microsoft, and OpenMined.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, June</span>
+                    <span class="ml-4">Went paragliding through the Alps in the south of France.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, May</span>
+                    <span class="ml-4">Gave a TEDx talk at TEDx Boston on AI Security.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, April</span>
+                    <span class="ml-4">Ran 🏃‍♂️ a whole marathon on my birthday for no clear reason.</span>
+                </li>
+
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, Jan</span>
+                    <span class="ml-4">Presented at Davos on privacy, security, and LLMs.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, Jan</span>
+                    <span class="ml-4">Contributed to the Singapore M3S program engaging with AI policy. Ate a lot of hawker food and ran 20km around the city. </span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, Dec</span>
+                    <span class="ml-4">Awarded an MIT Generative AI grant to research end-to-end privacy for generative AI.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, Summer</span>
+                    <span class="ml-4">Interned at Microsoft Research in the Cryptography and Plurality teams. Lived on a houseboat while I was there.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, Oct</span>
+                    <span class="ml-4">Downloaded the whole internet as part of the new Data Provenance initiative work for transparency in pretraining data.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, June</span>
+                    <span class="ml-4">Started a fellowship with the E14 VC Fund focusing on AI investments.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, Jan</span>
+                    <span class="ml-4">Ran a marathon in LA with my friends and then took a road trip in a Tesla around the West Coast. </span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-20 text-center text-xl">
+            <h3 class="py-4">Reach out if you want to talk AI, security, verifiability, or policy.</h3>
+            <p>If you're looking for me elsewhere, my handle is usually @tobinsouth</p>
+        </footer>
     </div>
-</div>
-</div> <!-- container -->
+
+    
+
+    <script>
+        document.getElementById('gday-trigger').addEventListener('click', createKangaroos);
+
+        function createKangaroos() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const kangaroo = document.createElement('div');
+                    kangaroo.textContent = '🦘';
+                    kangaroo.style.position = 'fixed';
+                    kangaroo.style.left = Math.random() * window.innerWidth + 'px';
+                    kangaroo.style.top = window.innerHeight + 'px';
+                    kangaroo.style.fontSize = '3rem';
+                    kangaroo.style.transition = 'all 2s ease-out';
+                    document.body.appendChild(kangaroo);
+
+                    setTimeout(() => {
+                        kangaroo.style.top = -100 + 'px';
+                        kangaroo.style.left = (Math.random() * window.innerWidth) + 'px';
+                    }, 50);
+
+                    setTimeout(() => {
+                        document.body.removeChild(kangaroo);
+                    }, 2000);
+                }, i * 200);
+            }
+        }
+    </script>
 </body>
 </html>
