@@ -2,323 +2,412 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/academicons.css" />
-    <title>Tobin South: Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tobin's Personal Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFDFE;
+            color: #1E1F24;
+        }
+        
+        .font-serif {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        @keyframes bounce-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-10px); }
+        }
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HT1TWG8N9Q"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-HT1TWG8N9Q');
-    </script>
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            animation: bounce-right 1.5s ease-in-out 1s;
+        }
+
+         .scroll-cue {
+            text-align: right;
+            color: #999;
+            font-size: 14px;
+            margin-top: 0px;
+            font-style: italic;
+        }
+
+        .card {
+            flex: 0 0 auto;
+            width: 20rem; /* equivalent to w-80 */
+            height: 12rem; /* equivalent to h-48 */
+            border-radius: 0.5rem; /* equivalent to rounded-lg */
+            background-color: #E0E1E6;
+            /* background-color: #fcfcfc; */
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #2563eb;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1E1F24;
+        }
+
+        .card:before {
+            background: linear-gradient(45deg, #2563eb, #10b981, #2563eb);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            /* transition: transform 0.1s, box-shadow 0.1s; */
+        }
+
+        /* .work-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 300px;
+            height: 300px;
+            aspect-ratio: 1/1;
+        }
+
+        .work-card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .work-card-description {
+            font-size: 0.9rem;
+            color: #5a6c7d;
+        } */
+
+        /* @media (min-width: 768px) {
+            .work-card-title {
+                font-size: 1.5rem;
+            }
+            .work-card-description {
+                font-size: 1rem;
+            }
+        } */
+
+        .news-card {
+            position: relative;
+            width: 20rem; /* equivalent to w-80 */
+            height: 12rem; /* equivalent to h-48 */
+            border-radius: 0.5rem; /* equivalent to rounded-lg */
+            overflow: hidden;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.2s;
+        }
+
+        .news-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .news-card h3 {
+            font-size: 1.25rem; /* equivalent to text-xl */
+            font-weight: 600; /* equivalent to font-semibold */
+           
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            /* transition: transform 0.1s, box-shadow 0.1s; */
+        }
+
+        .news-card-text {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            color: white;
+            padding: 1rem;
+            padding-right: 2rem;
+            z-index: 10;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #2563eb;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<div class="row m-lg-2 pt-lg-5 pt-2">
-    <div class="col-sm-6 text-center">
-        <div class="row" >
-            <img class="rounded-circle mx-auto float-end" src="images/ Tobin Imagination In Action Shoot - Square.jpg" alt = "Me" style="max-width: 400px; max-height: 400px;">
-        </div>
-        <h1 style="margin: 20px;">Tobin South</h1>
-        <h3>MIT PhD Student, 🇦🇺🇺🇸 Fulbrighter</h3>
-        <!-- nothisemailaddress@mit.edu -->
-        <a href="mailto:tsouth&commat;mit&period;edu">
-            <!-- <i class="fas fa-envelope icon"></i> -->
-            tsouth&commat;mit&period;edu
-        </a>
-        <div class="p-2">
-            <a href="https://www.linkedin.com/in/tobin-south-4b7235123/"><i class="fab fa-linkedin icon"></i></a>
-            &nbsp
-            <a href="https://github.com/tobinsouth"><i class="fab fa-github icon"></i></a> 
-            &nbsp
-            <a href="https://twitter.com/TobinSouth"><i class="fab fa-twitter icon"></i></a> 
-            &nbsp
-            <a href="https://scholar.google.com.au/citations?user=r5pPBFMAAAAJ&hl=en"><i class="ai ai-google-scholar icon"></i></i></a>
-            <br/>
-        </div>
-    </div>
-    <div class="col-sm-6 align-content-center align-self-center">
-    <h2>G'day, I'm Tobin</h2>
-        <p>
-            I'm a PhD student at MIT on a <a href="https://invest.sa.gov.au/articles/sa-student-wins-place-at-mit-and-fulbright-scholarship">Fulbright Future Scholarship</a>
-            advised by <a href="https://www.media.mit.edu/people/sandy/overview/">Sandy Pentland</a> in the Human Dynamics group at the <a href="https://www.media.mit.edu/research/?filter=groups">MIT Media Lab</a>
-            and Connection Science in the <a href="https://idss.mit.edu">Institute for Data, Systems, and Society</a>.  
-        </p>
-        <p>
-I work at the intersection of data, privacy, AI, and society. 
-            In particular, I'm focused on building privacy, security, verifiability, and regulatory compliance into frontier AI from first principles. 
-            My work has spanned across fields, from decentralized private data sharing to verifiable evaluation attestations for large AI models. 
-            I have contributed to the recent work on regulation for generative AI and am keenly interested in working on practically deployable solutions to solve privacy and security challenges in a changing world of technology.
-        </p>       
-    </div>
-</div>
-<div class="row m-lg-2 mt-3">
-    <p>
-        I have a fellowship with the <a href="https://www.e14.vc/">E14 VC fund</a>, helping with AI investments, and previously founded two startups in Australia (both of which failed). 
-        I have a non-executive role on the board of the <a href="https://dti.sa.gov.au/mit-bigdata-living-lab">MIT bigdata Living Lab</a> in Adelaide and sit on the Graduate Student Council at MIT.
-        I was involved in far too many committees and student organizations throughout my Bachelors, 
-        where I was Valedictorian of the graduating class of Mathematics, Computer Science, and Electrical Engineering.
-    </p>
-    <p>            
-        Before all that, I grew up in the <a href="https://www.google.com/search?q=%22Peanut+capital+of+Australia%22">"Peanut capital of Australia"</a>, 
-        the agricultural town of <a href="https://www.google.com/maps/place/Kingaroy+QLD+4610">Kingaroy, Queensland</a>; but I consider Adelaide my real home. 
-        Don't hesitate to reach out if you have something interesting to talk about. 
-    </p>
-</div>
-</div>
-
-
-<div class="container mx-auto">  <!-- The rest of the page will be wrapped in this. -->
-
-
-<div class="text-center mt-20 mb-2"><h2>Some Finished Papers & Notable Projects</h2></div>
-
-<div class="card-deck row row-cols-1 row-cols-lg-3 g-4">
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/diagramV2black.jpg">
-            <div class="card-body flex flex-col justify-end h-full">
-                <h4 class="card-title">Secure Community Transformers</h4>
-                <p class="card-text">An secure & privacy preserving approach to community data pooling for auditable information retrival in LLM use.</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://transformers.mit.edu" class="btn btn-danger my-2">Read the Whitepaper</a>
+    <div class="container mx-auto px-4 max-w-5xl">
+        <!-- Section 0: Title -->
+        <section class="flex flex-col md:flex-row items-center text-center justify-center pt-10 md:pt-30 ">
+            <div class="">
+                <h1 class="text-4xl md:text-7xl font-bold my-4 md:my-8 text-blue-600 font-serif"><span id="gday-trigger" class="cursor-pointer">G'day</span>, I'm Tobin</h1>
+                <div class="text-xl md:text-3xl">
+                    <p class="mb-4">MIT PhD Candidate, 🇦🇺🇺🇸 Fulbrighter</p>
+                    <div class="flex items-center space-x-4 justify-center text-3xl md:text-4xl">
+                        <a href="https://github.com/tobinsouth"><i class="fab fa-github"></i></a>
+                        <a href="https://twitter.com/tobinsouth"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/tobinsouth/"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://scholar.google.com/citations?user=r5pPBFMAAAAJ&hl=en"><i class="ai ai-google-scholar-square"></i></a>
+                    </div>
                 </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/tobintalking.png">
-            <div class="card-body flex flex-col justify-end h-full">
-                <h4 class="card-title">Short Talk at MIT Media Lab</h4>
-                <p class="card-text">"A Decentralized Society Needs An Offline" Public talk at the MIT Media Lab's Fall Members Week.</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://youtu.be/nZNjJaI_wDc" class="btn btn-danger my-2">Watch on Youtube</a>
+            </div>
+        </section>
+
+        <!-- Section 1: Intro -->
+        <section class="flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0 py-10 md:py-10">
+            <div class="w-full md:w-1/2 flex justify-center md:mt-0">
+                <div class="">
+                    <img src="images/Tobin 2024 Face.jpg" alt="Tobin's Main Profile Photo" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover">
                 </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/healthierfeed.png">
-            <div class="card-body">
-                <h4 class="card-title">Private Analysis on Personal Data</h4>
-                <p class="card-text">"Building a Healthier Feed: Private Location Trace Intersection Driven Feed Recommendations" working paper.
+            </div>
+            <div class="md:w-1/2 mb-10 md:mb-0 text-lg flex flex-col gap-4">
+                <div class="text-center md:text-left">
+                <h2 class="text-2xl md:text-3xl font-bold font-serif text-blue-600">Security + AI + Society</h2></div>
+                <p>
+                    Tobin is a senior PhD candidate at MIT on a <a href="https://invest.sa.gov.au/articles/sa-student-wins-place-at-mit-and-fulbright-scholarship">Fulbright Future Scholarship</a>,
+                    advised by <a href="https://en.wikipedia.org/wiki/Alex_Pentland">Sandy Pentland</a> at the <a href="https://www.media.mit.edu/research/?filter=groups">MIT Media Lab</a>. Tobin's research is focused on building privacy, verifiability, and regulatory compliance into frontier AI from first principles.
                 </p>
-            
-            <div class="text-center mt-auto mb-0">
-                <a href="https://tobin.page/healthierfeed" class="btn btn-danger text-center my-2">Read the Paper</a>
-            </div>  
-        </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/adsc.jpg">
-            <div class="card-body flex flex-col justify-end h-full">
-                <h4 class="card-title">The Future of Data Science</h4>
-                <p class="card-text">A talk for the Adelaide Data Science Centre on the Future of Data Science,</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://youtu.be/vvobGVBTDRY" class="btn btn-danger my-2">Watch on Youtube</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/InfoFlowSoloDiagramFlat.jpeg">
-            <div class="card-body">
-                <h4 class="card-title">Information flow estimation</h4>
-                <p class="card-text">Tobin South, Bridget Smart, Matthew Roughan, and Lewis Mitchell. Information flow estimation: A study of news on Twitter</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://doi.org/10.1016/j.osnem.2022.100231" class="btn btn-danger my-2">Read The Paper</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/EchoChamber.png">
-            <div class="card-body">
-                <h4 class="card-title">Echo Chambers Paper</h4>
-                <p class="card-text">Are we always in strife? A longitudinal study of the echo chamber effect in the Australian Twittersphere                </p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://arxiv.org/pdf/2201.09161.pdf" class="btn btn-danger my-2">Read The Paper</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/forecasting.png">
-            <div class="card-body">
-                <h4 class="card-title">Federal COVID-19 Forecasting</h4>
-                <p class="card-text">Official Government Forecasting COVID-19 cases during the pandemic to inform policy response. Using a hierarchical Bayesian model to learn state level priors for the effective reproduction number. Temporal posterior estimated using mobility indices and social distancing surveys which in turn allows for outbreak simulation. <a href="https://github.com/tobinsouth/covid19-forecasting-aus" style="color: #A31F34">Github Repository Link.</a> </p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://www.doherty.edu.au/uploads/content_doc/Technical_Report_15_March_2021_RELEASED_VERSION.pdf" class="btn btn-danger my-2">Government Technical Report</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/riskmapping.png">
-            <div class="card-body">
-                <h4 class="card-title">Spatial Risk Mapping</h4>
-                <p class="card-text">Developing spatial risk mapping tools to identify COVID-19 risk using Facebook and Department of Transport mobility datasets. Developed using Plotly Dash in collaboration between UofA, UMelb and DSTG.</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="http://bandicoot.maths.adelaide.edu.au/coviddash/" class="btn btn-danger my-2">Demo App</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/processentropy.png">
-            <div class="card-body">
-                <h4 class="card-title">ProcessEntropy</h4>
-                <p class="card-text">A package to calculate sequence level cross entropy rates (and self entropy rates), designed to by extremely fast for large text datasets. Useful in estimating entropic information flow. Built using python and numba.</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://github.com/tobinsouth/ProcessEntropy" class="btn btn-danger my-2">GitHub Repo</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/real_data_simulations.png">
-            <div class="card-body">
-                <h4 class="card-title">Research MPhil Thesis</h4>
-                <p class="card-text">My Thesis titled "Non-parametric Information Flow Estimation in Social-Media News" submitted for my Master of Philosophy in Applied Mathematics and Data Science at the University of Adelaide. </p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://github.com/tobinsouth/MPhil-Thesis/raw/master/Tobin%20South%20-%20MPhil%20Thesis.pdf" class="btn btn-danger my-2">Thesis PDF</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/contagion.png">
-            <div class="card-body">
-                <h4 class="card-title">Complex Information Contagions</h4>
-                <p class="card-text">Pond, Tyson, Saranzaya Magsarjav, Tobin South, Lewis Mitchell, and James P. Bagrow. "Complex contagion features without social reinforcement in a model of social information flow." Entropy 22, no. 3 (2020), doi.org/10.3390/e22030265</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://doi.org/10.3390/e22030265" class="btn btn-danger my-2">Read The Paper</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/spotify.png">
-            <div class="card-body">
-                <h4 class="card-title"> Spotify Networks & Critical Eigenvalues </h4>
-                <p class="card-text">Tobin South, Matthew Roughan, Lewis Mitchell, "Popularity and centrality in Spotify networks: critical transitions in eigenvector centrality", Journal of Complex Networks, Volume 8, Issue 6, 1 December 2020,
-                doi.org/10.1093/comnet/cnaa050</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://academic.oup.com/comnet/article/doi/10.1093/comnet/cnaa050/6161498?guestAccessKey=ee566d32-273e-44d6-bc82-165905b17b22" class="btn btn-danger my-2">Read The Paper</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/marvel.png">
-            <div class="card-body">
-                <h4 class="card-title">Character Networks in Marvel</h4>
-                <p class="card-text">Roughan, Matthew, Lewis Mitchell, and Tobin South. "How the Avengers assemble: Ecological modelling of effective cast sizes for movies." PLoS one 15, no. 2 (2020): doi.org/10.1371/journal.pone.0223833</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://doi.org/10.1371/journal.pone.0223833" class="btn btn-danger my-2">Read The Paper</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100 d-flex flex-column">
-            <img class="card-img-top" src="images/semeval.png">
-            <div class="card-body">
-                <h4 class="card-title">Sentiment Analysis in Turn Based Speech</h4>
-                <p class="card-text">Nguyen, Andrew, Tobin South, Nigel Bean, Jonathan Tuke, and Lewis Mitchell. "Podlab at SemEval-2019 Task 3: The Importance of Being Shallow." In Proceedings of the 13th International Workshop on Semantic Evaluation, pp. 292-296.
-                2019.</p>
-                <div class="text-center mt-auto mb-0">
-                <a href="https://www.aclweb.org/anthology/volumes/S19-2/" class="btn btn-danger my-2">Read The Paper</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-</div>
+                <p>
+                    Tobin's work is at the intersection of security, AI, and society, spanning across fields from private data sharing to verifiable evaluations for large AI models. He has contributed to recent work on regulation of generative AI and is keenly interested in working on practically deployable solutions to solve privacy and security challenges in a changing world of technology.
+                </p>    
+            </div>
+        </section>
 
+        <!-- Section 2: About Me -->
+        <section class="flex flex-col md:flex-row items-start justify-between  space-y-10 md:space-y-0 md:space-x-12 md:py-10">
+            <div class="w-full md:w-1/2 text-lg flex flex-col gap-4">
+                <p>
+                    <b class="text-blue-600">About Me:</b> I have a fellowship with the <a href="https://www.e14.vc/">E14 VC fund</a>, helping with AI investments, and previously founded a startup (which failed, great learning experience!). 
+                    I have a non-executive role on the board of the <a href="https://dti.sa.gov.au/mit-bigdata-living-lab">MIT bigdata Living Lab</a> in Adelaide and sit on the Graduate Student Council at MIT.
+                    In my undergraduate, I was Valedictorian of the graduating class of Mathematics, Computer Science, and Electrical Engineering.
+                </p>
+                <p>            
+                    Before all that, I grew up in the <a href="https://www.google.com/search?q=%22Peanut+capital+of+Australia%22">"Peanut capital of Australia"</a>, 
+                    the agricultural town of <a href="https://www.google.com/maps/place/Kingaroy+QLD+4610">Kingaroy, Queensland</a>; but I consider Adelaide my real home. 
+                    Don't hesitate to reach out if you have something interesting to talk about. 
+                </p>
+            </div>
+            <div class="w-full md:w-1/2">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <video autoplay loop muted class="w-full rounded-lg shadow-lg">
+                            <source src="images/shorttobin_no_audio_compressed.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div>
+                        <img src="images/tobin_workshop.jpg" alt="Description 1" class="w-full h-40 object-cover rounded-lg shadow-lg">
+                    </div>
+                    <div>
+                        <img src="images/Tobin_dramatic_square.jpg" alt="Description 2" class="w-full h-40 object-cover rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="row" style="margin-top: 50px;">
-    <div class="col-sm-6">
-        <h2> Teaching </h2>
-        <p> I've had opportunities to both teach and design courses and have loved every moment. This has included roles as joint-lecturer for a postgraduate computer science course, practical laboratory tutor for data science courses, and workshop tutor for professional skills courses. Here is a few pieces of student feedback from the anonymous assessment of teaching quality surveyed each semester. 
-        <blockquote class="text-center">
-            <q>Very well versed in material, very outgoing and friendly, easy to talk to and genuinely interested in helping our improvement and learning.</q>
-        </blockquote>
-        <blockquote class="text-center">
-            <q>He teaches with enthusiasm. He is always excited to teach new concepts. He clears everyone’s doubts with patience. </q>
-        </blockquote>
-        <blockquote class="text-center">
-            <q>Tobin took an incredibly dry and tedious subject, and turned the tutorials into something I actively looked forward to attending. He was able to explain the concepts clearly, and made participation feel comfortable. </q>
-        </blockquote>
-        <blockquote class="text-center">
-            <q>Please let Tobin be the main Lecturer. It could save students.</q>
-        </blockquote>
+        <!-- Section 3: Recent Work -->
+        <section class="py-10">
+            <h2 class="text-3xl font-bold">Some Recent Work</h2>
+            <div class="carousel"> 
+                <!-- <a href="https://mit-genai.pubpub.org/pub/m4msmss4" class="card">
+                    <h3>End-to-end security for GenAI</h3>
+                    <p class="work-card-description">Explore our approach to comprehensive GenAI security.</p>
+                </a> -->
+                <a href="https://arxiv.org/abs/2402.02675" class="card">
+                    <h3>Verifiable Model Evaluations</h3>
+                    <p class="work-card-description">Discover our methods for ensuring AI model integrity.</p>
+                </a>
+                <a href="https://arxiv.org/abs/2311.12955" class="card">
+                    <h3>Private Retrieval Augmented Generation</h3>
+                    <p class="work-card-description">Learn about our innovative RAG techniques.</p>
+                </a>
+                <a href="https://cdn.governance.ai/Open_Problems_in_Technical_AI_Governance.pdf" class="card">
+                    <h3>Open Problems in Technical AI Governance</h3>
+                    <p class="work-card-description">Explore key challenges in AI governance.</p>
+                </a>
+                <a href="https://arxiv.org/pdf/2408.07892" class="card">
+                    <h3>Personhood Credentials</h3>
+                    <p class="work-card-description">Learn about our work on protecting digital spaces.</p>
+                </a>
+                <a href="https://www.networklawreview.org/computational-three" class="card">
+                    <h3>Transparency by Design for LLMs</h3>
+                    <p class="work-card-description">Understanding how RAG can provide auditability and updateability for LLMs.</p>
+                </a>
+                <a href="https://arxiv.org/abs/2311.13008" class="card">
+                    <h3>Zero-knowledge tax disclosures</h3>
+                    <p class="work-card-description">Discover our research on privacy-preserving financial disclosures.</p>
+                </a>
+                <a href="https://www.dataprovenance.org/Consent_in_Crisis.pdf" class="card">
+                    <h3>Decline of the AI Data Commons</h3>
+                    <p class="work-card-description">Explore our research on the changing landscape of AI data.</p>
+                </a>
+                <a href="https://mit-genai.pubpub.org/pub/uk7op8zs/release/2" class="card">
+                    <h3>Data Consent and Provenance are Broken</h3>
+                    <p class="work-card-description">Discover the challenges in AI data management.</p>
+                </a>
+                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4688040" class="card">
+                    <h3>Plural Management</h3>
+                    <p class="work-card-description">A management system for open-source teams that naturally distributed management and ownership over time.</p>
+                </a>
+            </div>
+            <div class="scroll-cue">Scroll for more <span class="arrow">➜</span></div>
+        </section>
+
+        <!-- Section 4: News -->
+        <section class="">
+            <h2 class="text-3xl font-bold">News Stories & Talks</h2>
+            <div class="carousel">
+                <a href="https://news.mit.edu/2024/3-questions-proving-humanity-online-0816" class="news-card" style="background-image: url('images/media/MIT-3Q-personhood-01-press_0.jpg');">
+                    <div class="news-card-text">
+                        <h4>MIT News</h4>
+                        <h3>Privacy and Personhood online with future AI</h3>
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=zfU5P-aeYaw" class="news-card" style="background-image: url('images/media/TEDx\ Screenshot.png');">
+                    <div class="news-card-text">
+                        <h4>TEDx Boston</h4>
+                        <h3>Reimagining ​security for AI</h3>
+                    </div>
+                </a>
+                <a href="https://www.adelaide.edu.au/alumni/news/list/2024/08/06/tobin-south" class="news-card" style="background-image: url('images/media/dsc03613-resize.jpg');">
+                    <div class="news-card-text">
+                        <h4>Adelaide Alumni Interview</h4>
+                        <h3>A journey to MIT</h3>
+                    </div>
+                </a>
+                <a href="https://www.adelaidenow.com.au/news/future-adelaide/future-bright-sa-data-scientist-awarded-scholarship-to-study-at-mit-in-massachusetts/news-story/3e13c7d19ac17cdda1fb8b5b16257e61" class="news-card" style="background-image: url('images/media/2d0e8b13a8e679d2960c4b61ba7b87a5.jpg');">
+                    <div class="news-card-text">
+                        <h4>The Advertiser</h4>
+                        <h3>Southern Star</h3>
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=vvobGVBTDRY" class="news-card" style="background-image: url('images/media/1da4e2be88faeb7ab0a828a57dc06236.webp');">
+                    <div class="news-card-text">
+                        <h4>Seminar Talk</h4>
+                        <h3>The Future of Data Science with LLMs</h3>
+                    </div>
+                </a>
+                <a href="https://www.nytimes.com/2024/07/19/technology/ai-data-restrictions.html" class="news-card" style="background-image: url('images/media/20roose-superJumbo.webp');">
+                    <div class="news-card-text">
+                        <h4>New York Times</h4>
+                        <h3>AI Data Restrictions</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="scroll-cue">Scroll for more <span class="arrow">➜</span></div>
+        </section>
+
+        <!-- Life Updates -->
+        <section>
+            <h2 class="text-3xl font-bold mb-5">Life Updates</h2>
+            <ul class="space-y-2">
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, Aug</span>
+                    <span class="ml-4">Contributed to a large project on personhood credentials with collaborators from OpenAI, Microsoft, and OpenMined.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, June</span>
+                    <span class="ml-4">Went paragliding through the Alps in the south of France.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, May</span>
+                    <span class="ml-4">Gave a TEDx talk at TEDx Boston on AI Security.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, April</span>
+                    <span class="ml-4">Ran 🏃‍♂️ a whole marathon on my birthday for no clear reason.</span>
+                </li>
+
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, Jan</span>
+                    <span class="ml-4">Presented at Davos on privacy, security, and LLMs.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2024, Jan</span>
+                    <span class="ml-4">Contributed to the Singapore M3S program engaging with AI policy. Ate a lot of hawker food and ran 20km around the city. </span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, Dec</span>
+                    <span class="ml-4">Awarded an MIT Generative AI grant to research end-to-end privacy for generative AI.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, Summer</span>
+                    <span class="ml-4">Interned at Microsoft Research in the Cryptography and Plurality teams. Lived on a houseboat while I was there.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, Oct</span>
+                    <span class="ml-4">Downloaded the whole internet as part of the new Data Provenance initiative work for transparency in pretraining data.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, June</span>
+                    <span class="ml-4">Started a fellowship with the E14 VC Fund focusing on AI investments.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="font-semibold text-blue-600 w-36 flex-shrink-0">2023, Jan</span>
+                    <span class="ml-4">Ran a marathon in LA with my friends and then took a road trip in a Tesla around the West Coast. </span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-20 text-center text-xl">
+            <h3 class="py-4">Reach out if you want to talk AI, security, verifiability, or policy.</h3>
+            <p>If you're looking for me elsewhere, my handle is usually @tobinsouth</p>
+        </footer>
     </div>
 
-    <div class="col-sm-6">
-        <h2> News Appearances</h2>
-        <div class="list-group">
-            <a href="https://www.adelaidenow.com.au/news/future-adelaide/future-bright-sa-data-scientist-awarded-scholarship-to-study-at-mit-in-massachusetts/news-story/3e13c7d19ac17cdda1fb8b5b16257e61"  class="list-group-item list-group-item-action">"Southern Star" News Article</a>  
-            <a href="https://invest.sa.gov.au/articles/sa-student-wins-place-at-mit-and-fulbright-scholarship" class="list-group-item list-group-item-action">SA Government Article about me</a>  
-            <a href="https://acems.org.au/news/tobin-south-fulbright-mit" class="list-group-item list-group-item-action">Profile by the ARC Centre of Excellence for Mathematical and Statistical Frontiers</a>
-            <a href="https://www.abc.net.au/news/science/2020-03-07/marvel-movies-popularity/12032336" class="list-group-item list-group-item-action">Marvel Paper in Australian Media</a>
-            <a href="https://www.brisbanetimes.com.au/national/queensland/queenslanders-breaking-down-language-barriers-and-scanning-x-rays-with-ai-20200710-p55ayx.html"
-                class="list-group-item list-group-item-action"> Brief interview about former HealthTech startup</a> 
-        </div>
-    </div>
+    
 
-</div>
+    <script>
+        document.getElementById('gday-trigger').addEventListener('click', createKangaroos);
 
-<div class="row" style="margin-top: 50px;">
-    <div class="col-sm-6">
-        <h2>Professional Work & Startups</h2>
-        <p>In early 2019 I co-founded an analytics startup which was acquired by AI consulting group Brainframe where I transitions to consulting work specialising in NLP and open data. In mid 2020 I co-founded a small healthtech startup digitising public sector medical consent, which was founded after winning a medical hackathon in Queensland. I've since moved on from both of these organisations.</p>
-    </div>
+        function createKangaroos() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const kangaroo = document.createElement('div');
+                    kangaroo.textContent = '🦘';
+                    kangaroo.style.position = 'fixed';
+                    kangaroo.style.left = Math.random() * window.innerWidth + 'px';
+                    kangaroo.style.top = window.innerHeight + 'px';
+                    kangaroo.style.fontSize = '3rem';
+                    kangaroo.style.transition = 'all 2s ease-out';
+                    document.body.appendChild(kangaroo);
 
-    <div class="col-sm-6">
-        <h2> Personal Life</h2>
-            In my free time I love to run 🏃, cycle 🚲, and swim 🏊, but I seem to be constantly injured in at least one of the three sports...
-            <br/>
-            <br />
-            <!-- I also attend an <a href="https://github.com/ofchurches/AI_ethics_bookclub/wiki)"> AI Ethics Bookclub </a>, which I sometimes help run. -->
-            <!-- <br/> -->
-        Overall, I try to live by the words my mum would inculcate each morning.
-        <blockquote class="blockquote text-center">
-            Work hard, <br/>
-            Learn well, <br/>
-            Choose your attitude. 
-        </blockquote>
-    </div>
-</div>
+                    setTimeout(() => {
+                        kangaroo.style.top = -100 + 'px';
+                        kangaroo.style.left = (Math.random() * window.innerWidth) + 'px';
+                    }, 50);
 
-<!-- <div class="row text-center" style="margin-top: 50px;">
-    <h2>Helpful Links</h2>
-    <p>
-<!--         <a class="btn" href="files/CV_Tobin.pdf" >CV (June 2022)</a> -->
-<!--         <a class="btn"  href="https://calendly.com/tobinsouth/book" >Book a time to talk to me.</a> -->
-    </p>
-</div> -->
-
-</div> <!-- container -->
+                    setTimeout(() => {
+                        document.body.removeChild(kangaroo);
+                    }, 2000);
+                }, i * 200);
+            }
+        }
+    </script>
 </body>
 </html>
