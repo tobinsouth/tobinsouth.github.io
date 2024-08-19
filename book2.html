@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Collection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFDFE;
+            color: #1E1F24;
+        }
+
+        .bookshelf {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            padding: 20px;
+            gap: 0;
+        }
+
+        .book {
+            position: relative;
+            height: 300px;
+            width: 40px;
+            margin-right: -20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .book:hover {
+            transform: translateX(20px);
+        }
+
+        .cover {
+            height: 100%;
+            width: 200px;
+            background-size: cover;
+            background-position: left center;
+            transition: all 0.3s ease;
+        }
+
+        .book:hover .cover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .selected-book {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            background-color: white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .selected-book.active {
+            opacity: 1;
+            bottom: 40px;
+        }
+
+        @media (max-width: 640px) {
+            .book {
+                height: 200px;
+                width: 30px;
+                margin-right: -15px;
+            }
+
+            .cover {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-8 max-w-6xl mx-auto">
+    <div class="container mx-auto">
+        <h1 class="md:text-6xl text-4xl font-bold mb-16 text-center text-gray-800">My Bookshelf</h1>
+        <div id="bookshelf" class="bookshelf"></div>
+    </div>
+    <div id="selectedBook" class="selected-book">
+        <img id="selectedCover" src="" alt="" class="w-full h-auto">
+        <div class="p-4">
+            <h2 id="selectedTitle" class="text-lg font-semibold mb-1"></h2>
+            <a id="selectedAuthor" href="" class="text-sm text-gray-600 hover:underline" target="_blank" rel="noopener noreferrer"></a>
+        </div>
+    </div>
+
+    <script>
+        const csvData = `
+"From Secret Ballot to Democracy Sausage: How Australia Got Compulsory Voting", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1545962395l/43377434.jpg","goodreads.com/author/show/623005.Judith_Brett", Brett, Judith,
+"Project Hail Mary", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1597695864l/54493401.jpg","goodreads.com/author/show/6540057.Andy_Weir", Weir, Andy,
+"Trust", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1631246461l/58210933.jpg","goodreads.com/author/show/392822.Hernan_Diaz", Diaz, Hernan,
+"The Anthropocene Reviewed: Essays on a Human-Centered Planet", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1616514130l/55145261.jpg","goodreads.com/author/show/1406384.John_Green", Green, John,
+"How to Avoid a Climate Disaster: The Solutions We Have and the Breakthroughs We Need", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1609355352l/52275335.jpg","goodreads.com/author/show/23470.Bill_Gates", Gates, Bill,
+"Siddhartha", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1629378189l/52036.jpg","goodreads.com/author/show/1113469.Hermann_Hesse", Hesse, Hermann,
+"The Ministry for the Future", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1668935201l/50998056.jpg","goodreads.com/author/show/1858.Kim_Stanley_Robinson", Robinson, Kim Stanley,
+"Girt (The Unauthorised History of Australia #1)", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1381300656l/18179458.jpg","goodreads.com/author/show/7731636.David_Hunt", Hunt, David,
+"Lexicon", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1394409567l/18667803.jpg","goodreads.com/author/show/18741.Max_Barry", Barry, Max,
+"Four Thousand Weeks: Time Management for Mortals", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1627425434l/54785515.jpg","goodreads.com/author/show/4384050.Oliver_Burkeman", Burkeman, Oliver,
+"There Is No Antimemetics Division", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1597056415l/54870256.jpg","goodreads.com/author/show/392822.Hernan_Diaz", Diaz, Hernan,
+"Predictably Irrational: The Hidden Forces That Shape Our Decisions", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1255573980l/1713426.jpg","goodreads.com/author/show/788461.Dan_Ariely", Dan Ariely,
+"Talking to My Daughter About the Economy: or, How Capitalism Works—and How It Fails", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1509179919l/36490332.jpg","goodreads.com/author/show/405898.Yanis_Varoufakis", Varoufakis, Yanis,
+        `;
+
+        function parseCSV(csv) {
+            const rows = csv.trim().split('\n');
+            return rows.map(row => {
+                const values = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+                return values.map(v => v.replace(/^"|"$/g, '').trim());
+            });
+        }
+
+        function createBookElement(book) {
+            const [title, imageUrl, authorUrl, lastName, firstName] = book;
+            const bookElement = document.createElement('div');
+            bookElement.className = 'book';
+            const randomHeight = Math.floor(Math.random() (300 - 200 + 1) + 200);
+            bookElement.style.height = `${randomHeight}px`;
+            bookElement.innerHTML = <div class="cover" style="background-image: url('${imageUrl}');"></div> ;
+            
+            bookElement.addEventListener('click', () => {
+                const selectedBook = document.getElementById('selectedBook');
+                const selectedCover = document.getElementById('selectedCover');
+                const selectedTitle = document.getElementById('selectedTitle');
+                const selectedAuthor = document.getElementById('selectedAuthor');
+                selectedCover.src = imageUrl;
+                selectedTitle.textContent = title;
+                selectedAuthor.textContent = `${firstName} ${lastName}`;
+                selectedAuthor.href = `https://${authorUrl}`;
+                selectedBook.classList.add('active');
+            });
+            return bookElement;
+            }
+
+        function displayBooks() {
+            const bookshelf = document.getElementById('bookshelf');
+            const books = parseCSV(csvData);
+            books.forEach((book, index) => {
+                const bookElement = createBookElement(book);
+                bookElement.style.zIndex = index;
+                bookshelf.appendChild(bookElement);
+            });
+        }
+        displayBooks();
+
+        // Close selected book when clicking outside
+        // document.addEventListener('click', (event) => {
+        //     const selectedBook = document.getElementById('selectedBook');
+        //     if (!selectedBook.contains(event.target) && !event.target.closest('.book')) {
+        //     selectedBook.classList.remove('active');
+        // }
+        // });
+
+        // function createBookElement(book) {
+        //     const [title, imageUrl, authorUrl, lastName, firstName] = book;
+        //     const bookElement = document.createElement('div');
+        //     bookElement.className = 'book';
+            
+        //     const randomHeight = Math.floor(Math.random() * (300 - 200 + 1) + 200);
+        //     bookElement.style.height = `${randomHeight}px`;
+
+        //     bookElement.innerHTML = `
+        //         <div class="cover" style="background-image: url('${imageUrl}');">
+        //             <div class="info">
+        //                 <h2 class="text-sm font-semibold mb-1">${title}</h2>
+        //                 <a href="https://${authorUrl}" class="text-xs hover:underline" target="_blank" rel="noopener noreferrer">${firstName} ${lastName}</a>
+        //             </div>
+        //         </div>
+        //     `;
+        //     return bookElement;
+        // }
+
+        // function displayBooks() {
+        //     const bookshelf = document.getElementById('bookshelf');
+        //     const books = parseCSV(csvData);
+        //     books.forEach((book, index) => {
+        //         const bookElement = createBookElement(book);
+        //         bookElement.style.zIndex = index;
+        //         bookshelf.appendChild(bookElement);
+        //     });
+        // }
+
+    </script>
+</body>
+</html>
