@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Collection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFDFE;
+            color: #1E1F24;
+        }
+        
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+        .book-info {
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .book-card:hover .book-info {
+            transform: translateY(0);
+        }
+        .book-card:hover img {
+            filter: brightness(0.8);
+            transition: filter 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-20 max-w-6xl mx-auto">
+    <div class="container mx-auto">
+        <h1 class="text-6xl font-bold mb-16 text-center text-gray-800">Some books I love</h1>
+        <div id="bookGrid" class="book-grid"></div>
+    </div>
+
+    <script>
+        const csvData = `
+"From Secret Ballot to Democracy Sausage: How Australia Got Compulsory Voting", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1545962395l/43377434.jpg","goodreads.com/author/show/623005.Judith_Brett", Brett, Judith,
+"Project Hail Mary", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1597695864l/54493401.jpg","goodreads.com/author/show/6540057.Andy_Weir", Weir, Andy,
+"Trust", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1631246461l/58210933.jpg","goodreads.com/author/show/392822.Hernan_Diaz", Diaz, Hernan,
+"The Anthropocene Reviewed: Essays on a Human-Centered Planet", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1616514130l/55145261.jpg","goodreads.com/author/show/1406384.John_Green", Green, John,
+"How to Avoid a Climate Disaster: The Solutions We Have and the Breakthroughs We Need", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1609355352l/52275335.jpg","goodreads.com/author/show/23470.Bill_Gates", Gates, Bill,
+"Siddhartha", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1629378189l/52036.jpg","goodreads.com/author/show/1113469.Hermann_Hesse", Hesse, Hermann,
+"The Ministry for the Future", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1668935201l/50998056.jpg","goodreads.com/author/show/1858.Kim_Stanley_Robinson", Robinson, Kim Stanley,
+"Girt (The Unauthorised History of Australia #1)", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1381300656l/18179458.jpg","goodreads.com/author/show/7731636.David_Hunt", Hunt, David,
+"Lexicon", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1394409567l/18667803.jpg","goodreads.com/author/show/18741.Max_Barry", Barry, Max,
+"Four Thousand Weeks: Time Management for Mortals", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1627425434l/54785515.jpg","goodreads.com/author/show/4384050.Oliver_Burkeman", Burkeman, Oliver,
+"There Is No Antimemetics Division", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1597056415l/54870256.jpg","goodreads.com/author/show/392822.Hernan_Diaz", Diaz, Hernan,
+"Predictably Irrational: The Hidden Forces That Shape Our Decisions", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1255573980l/1713426.jpg","goodreads.com/author/show/788461.Dan_Ariely", Dan Ariely,
+"Talking to My Daughter About the Economy: or, How Capitalism Works—and How It Fails", "https://i.gr-assets.com/images/S/photo.goodreads.com/books/1509179919l/36490332.jpg","goodreads.com/author/show/405898.Yanis_Varoufakis", Varoufakis, Yanis,
+        `;
+
+        function parseCSV(csv) {
+            const rows = csv.trim().split('\n');
+            return rows.map(row => {
+                const values = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+                return values.map(v => v.replace(/^"|"$/g, '').trim());
+            });
+        }
+
+        function createBookCard(book) {
+            const [title, imageUrl, authorUrl, lastName, firstName] = book;
+            const card = document.createElement('div');
+            card.className = 'flex flex-col items-center';
+            card.innerHTML = `
+                <img src="${imageUrl}" alt="${title}" class="w-[150px] h-auto mb-4 shadow-md hover:scale-105 transition-all duration-300">
+                <h2 class="text-sm font-semibold mb-1 text-center text-gray-800">${title}</h2>
+                <a href="https://${authorUrl}" class="text-xs text-gray-600 hover:text-gray-800 transition-colors duration-300" target="_blank" rel="noopener noreferrer">${firstName} ${lastName}</a>
+            `;
+            return card;
+        }
+
+        function displayBooks() {
+            const bookGrid = document.getElementById('bookGrid');
+            const books = parseCSV(csvData);
+            books.forEach(book => {
+                const card = createBookCard(book);
+                bookGrid.appendChild(card);
+            });
+        }
+
+        displayBooks();
+    </script>
+</body>
+</html>
