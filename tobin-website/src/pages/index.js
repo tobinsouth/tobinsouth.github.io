@@ -33,7 +33,7 @@ export default function Home() {
       {/* Section 0: Title */}
       <section className="flex flex-col md:flex-row items-center text-center justify-center pt-10 md:pt-30">
         <div>
-          <h1 className="text-4xl md:text-7xl font-bold my-4 md:my-8 text-blue-600 font-serif cursor-pointer" onClick={handleKangarooClick}>G'day, I'm Tobin</h1>
+          <h1 className="text-4xl md:text-7xl font-bold my-4 md:my-8 text-blue-600 font-serif cursor-pointer" onClick={handleKangarooClick}>G&apos;day, I&apos;m Tobin</h1>
           <div className="text-xl md:text-3xl">
             <p className="mb-4">MIT PhD Candidate, 🇦🇺🇺🇸 Fulbrighter</p>
             <div className="flex items-center space-x-4 justify-center text-3xl md:text-4xl">
@@ -51,7 +51,7 @@ export default function Home() {
           <div className="w-full md:w-1/2 flex justify-center md:mt-0">
             <Image
               src="/images/Tobin 2024 Face.jpg"
-              alt="Tobin's Main Profile Photo"
+              alt="Tobin&apos;s Main Profile Photo"
               className="rounded-full"
               width={320}
               height={320}
@@ -68,11 +68,11 @@ export default function Home() {
               </a>
               , advised by{' '}
               <a href="https://en.wikipedia.org/wiki/Alex_Pentland">Sandy Pentland</a> at the{' '}
-              <a href="https://www.media.mit.edu/research/?filter=groups">MIT Media Lab</a>. Tobin's research is focused
+              <a href="https://www.media.mit.edu/research/?filter=groups">MIT Media Lab</a>. Tobin&apos;s research is focused
               on building privacy, verifiability, and regulatory compliance into frontier AI from first principles.
             </p>
             <p>
-              Tobin's work is at the intersection of security, AI, and society, spanning across fields from private data
+              Tobin&apos;s work is at the intersection of security, AI, and society, spanning across fields from private data
               sharing to verifiable evaluations for large AI models. He has contributed to recent work on regulation of
               generative AI and is keenly interested in working on practically deployable solutions to solve privacy and
               security challenges in a changing world of technology.
@@ -89,9 +89,9 @@ export default function Home() {
                     In my undergraduate, I was Valedictorian of the graduating class of Mathematics, Computer Science, and Electrical Engineering.
                 </p>
                 <p>            
-                    Before all that, I grew up in the <a href="https://www.google.com/search?q=%22Peanut+capital+of+Australia%22">"Peanut capital of Australia"</a>, 
+                    Before all that, I grew up in the <a href="https://www.google.com/search?q=%22Peanut+capital+of+Australia%22">&quot;Peanut capital of Australia&quot;</a>, 
                     the agricultural town of <a href="https://www.google.com/maps/place/Kingaroy+QLD+4610">Kingaroy, Queensland</a>; but I consider Adelaide my real home. 
-                    Don't hesitate to reach out if you have something interesting to talk about. 
+                    Don&apos;t hesitate to reach out if you have something interesting to talk about. 
                 </p>
             </div>
             <div class="w-full md:w-1/2">
@@ -279,7 +279,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-20 text-center text-xl">
         <h3 className="py-4">Reach out if you want to talk AI, security, verifiability, or policy.</h3>
-        <p>If you're looking for me elsewhere, my handle is usually @tobinsouth</p>
+        <p>If you&apos;re looking for me elsewhere, my handle is usually @tobinsouth</p>
       </footer>
 
     </div>

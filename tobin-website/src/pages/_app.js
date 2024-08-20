@@ -6,7 +6,7 @@ function Layout({ children }) {
   return (
     <>
       <Head>
-        <title>Tobin South's Website</title>
+        <title>Tobin South&apos;s Website</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" type="image/x-icon" href="/images/kangaroo.ico" />
       </Head>
