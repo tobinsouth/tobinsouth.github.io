@@ -35,12 +35,17 @@
             animation: bounce-right 1.5s ease-in-out 1s;
         }
 
-         .scroll-cue {
+        .scroll-cue {
             text-align: right;
             color: #999;
             font-size: 14px;
             margin-top: 0px;
             font-style: italic;
+            cursor: pointer;
+        }
+
+        .scroll-cue:hover {
+            color: #2563eb;
         }
 
         .card {
@@ -215,7 +220,7 @@
             <div class="w-full md:w-1/2">
                 <div class="grid grid-cols-2 gap-4">
                     <div class="col-span-2">
-                        <video autoplay loop muted class="w-full rounded-lg shadow-lg">
+                        <video playsinline autoplay loop muted class="w-full rounded-lg shadow-lg">
                             <source src="images/shorttobin_no_audio_compressed.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -233,7 +238,7 @@
         <!-- Section 3: Recent Work -->
         <section class="py-10">
             <h2 class="text-3xl font-bold">Some Recent Work</h2>
-            <div class="carousel"> 
+            <div class="carousel" id="work-carousel"> 
                 <!-- <a href="https://mit-genai.pubpub.org/pub/m4msmss4" class="card">
                     <h3>End-to-end security for GenAI</h3>
                     <p class="work-card-description">Explore our approach to comprehensive GenAI security.</p>
@@ -275,13 +280,13 @@
                     <p class="work-card-description">A management system for open-source teams that naturally distributed management and ownership over time.</p>
                 </a>
             </div>
-            <div class="scroll-cue">Scroll for more <span class="arrow">➜</span></div>
+            <div class="scroll-cue" onclick="autoScroll('work-carousel')">Scroll for more <span class="arrow">➜</span></div>
         </section>
 
         <!-- Section 4: News -->
         <section class="">
             <h2 class="text-3xl font-bold">News Stories & Talks</h2>
-            <div class="carousel">
+            <div class="carousel" id="news-carousel">
                 <a href="https://news.mit.edu/2024/3-questions-proving-humanity-online-0816" class="news-card" style="background-image: url('images/media/MIT-3Q-personhood-01-press_0.jpg');">
                     <div class="news-card-text">
                         <h4>MIT News</h4>
@@ -319,7 +324,7 @@
                     </div>
                 </a>
             </div>
-            <div class="scroll-cue">Scroll for more <span class="arrow">➜</span></div>
+            <div class="scroll-cue" onclick="autoScroll('news-carousel')">Scroll for more <span class="arrow">➜</span></div>
         </section>
 
         <!-- Life Updates -->
@@ -384,6 +389,7 @@
     
 
     <script>
+        // Trigger the kangaroo animation
         document.getElementById('gday-trigger').addEventListener('click', createKangaroos);
 
         function createKangaroos() {
@@ -409,6 +415,27 @@
                 }, i * 200);
             }
         }
-    </script>
+
+        // Auto scroll function for the carousel
+        function autoScroll(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const scrollAmount = carousel.scrollWidth - carousel.clientWidth;
+            const duration = 5000; // 5 seconds
+            const start = carousel.scrollLeft;
+            const startTime = performance.now();
+
+            function step(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                carousel.scrollLeft = start + progress * scrollAmount;
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                }
+            }
+
+            requestAnimationFrame(step);
+        }
+        </script>
 </body>
 </html>
