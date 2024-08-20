@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px 0;
+  scroll-snap-type: x mandatory;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: 20rem;
+  height: 12rem;
+  border-radius: 0.5rem;
+  background-color: #E0E1E6;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  scroll-snap-align: start;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #1E1F24;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.news-card {
+  position: relative;
+  width: 20rem;
+  height: 12rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.2s;
+  scroll-snap-align: start;
+}
+
+.news-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+}
+
+.news-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.news-card-text {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  color: white;
+  padding: 1rem;
+  padding-right: 2rem;
+  z-index: 10;
+}
+
+.news-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.scroll-cue {
+  text-align: right;
+  color: #999;
+  font-size: 14px;
+  margin-top: 0px;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.scroll-cue:hover {
+  color: #2563eb;
+}
+
+
+@layer utilities {
+  .snap-x {
+    scroll-snap-type: x mandatory;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.carousel {
+  scroll-behavior: smooth;
+}
+
+.carousel:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 7));
+  }
+}
