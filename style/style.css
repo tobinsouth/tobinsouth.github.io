@@ -8,9 +8,13 @@ body {
     color: #1E1F24;
 }
 
-.font-serif {
-    font-family: 'Times New Roman', Times, serif;
+b {
+    font-weight: 800;
 }
+
+/* .font-serif {
+    font-family: 'Times New Roman', Times, serif;
+} */
 
 @keyframes bounce-right {
     0%, 100% { transform: translateX(0); }
