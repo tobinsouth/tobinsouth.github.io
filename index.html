@@ -5,165 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tobin South's Website</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/kangaroo.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDFDFE;
-            color: #1E1F24;
-        }
-        
-        .font-serif {
-            font-family: 'Times New Roman', Times, serif;
-        }
-        
-        @keyframes bounce-right {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(-10px); }
-        }
-
-
-        .carousel {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px 0;
-            animation: bounce-right 1.5s ease-in-out 1s;
-        }
-
-        .scroll-cue {
-            text-align: right;
-            color: #999;
-            font-size: 14px;
-            margin-top: 0px;
-            font-style: italic;
-            cursor: pointer;
-        }
-
-        .scroll-cue:hover {
-            color: #2563eb;
-        }
-
-        .card {
-            flex: 0 0 auto;
-            width: 20rem; /* equivalent to w-80 */
-            height: 12rem; /* equivalent to h-48 */
-            border-radius: 0.5rem; /* equivalent to rounded-lg */
-            background-color: #E0E1E6;
-            /* background-color: #fcfcfc; */
-            padding: 20px;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: #2563eb;
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #1E1F24;
-        }
-
-        .card:before {
-            background: linear-gradient(45deg, #2563eb, #10b981, #2563eb);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            /* transition: transform 0.1s, box-shadow 0.1s; */
-        }
-
-        /* .work-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 300px;
-            height: 300px;
-            aspect-ratio: 1/1;
-        }
-
-        .work-card-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        .work-card-description {
-            font-size: 0.9rem;
-            color: #5a6c7d;
-        } */
-
-        /* @media (min-width: 768px) {
-            .work-card-title {
-                font-size: 1.5rem;
-            }
-            .work-card-description {
-                font-size: 1rem;
-            }
-        } */
-
-        .news-card {
-            position: relative;
-            width: 20rem; /* equivalent to w-80 */
-            height: 12rem; /* equivalent to h-48 */
-            border-radius: 0.5rem; /* equivalent to rounded-lg */
-            overflow: hidden;
-            flex-shrink: 0;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.2s;
-        }
-
-        .news-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
-        }
-
-        .news-card h3 {
-            font-size: 1.25rem; /* equivalent to text-xl */
-            font-weight: 600; /* equivalent to font-semibold */
-           
-        }
-
-        .news-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            /* transition: transform 0.1s, box-shadow 0.1s; */
-        }
-
-        .news-card-text {
-            position: absolute;
-            bottom: 1rem;
-            left: 1rem;
-            color: white;
-            padding: 1rem;
-            padding-right: 2rem;
-            z-index: 10;
-        }
-
-        a {
-            color: #2563eb;
-            text-decoration: underline;
-        }
-        a:hover {
-            color: #2563eb;
-        }
-    </style>
+    <link rel="stylesheet" href="style/output.css">
 </head>
 <body>
     <div class="container mx-auto px-4 max-w-5xl">
@@ -221,7 +65,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div class="col-span-2">
                         <video playsinline autoplay loop muted class="w-full rounded-lg shadow-lg" preload="auto">
-                            <source src="images/shorttobin_no_audio_compressed.mp4" type="video/mp4">
+                            <source src="images/compressed_video.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>

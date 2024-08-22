@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FDFDFE;
+    color: #1E1F24;
+}
+
+.font-serif {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+@keyframes bounce-right {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-10px); }
+}
+
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    animation: bounce-right 1.5s ease-in-out 1s;
+}
+
+.scroll-cue {
+    text-align: right;
+    color: #999;
+    font-size: 14px;
+    margin-top: 0px;
+    font-style: italic;
+    cursor: pointer;
+}
+
+.scroll-cue:hover {
+    color: #2563eb;
+}
+
+.card {
+    flex: 0 0 auto;
+    width: 20rem; /* equivalent to w-80 */
+    height: 12rem; /* equivalent to h-48 */
+    border-radius: 0.5rem; /* equivalent to rounded-lg */
+    background-color: #E0E1E6;
+    /* background-color: #fcfcfc; */
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #2563eb;
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #1E1F24;
+}
+
+.card:before {
+    background: linear-gradient(45deg, #2563eb, #10b981, #2563eb);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.news-card {
+    position: relative;
+    width: 20rem; /* equivalent to w-80 */
+    height: 12rem; /* equivalent to h-48 */
+    border-radius: 0.5rem; /* equivalent to rounded-lg */
+    overflow: hidden;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.2s;
+}
+
+.news-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+}
+
+.news-card h3 {
+    font-size: 1.25rem; /* equivalent to text-xl */
+    font-weight: 600; /* equivalent to font-semibold */
+    
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    /* transition: transform 0.1s, box-shadow 0.1s; */
+}
+
+.news-card-text {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    color: white;
+    padding: 1rem;
+    padding-right: 2rem;
+    z-index: 10;
+}
+
+a {
+    color: #363c59;
+    text-decoration: none;
+}
+a:hover {
+    color: #2563eb;
+}
