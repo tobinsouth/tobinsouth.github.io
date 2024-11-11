@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/output.css">
+    <title>AI Thesis Components</title>
+    <style>
+        .pipeline-container {
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+        .pipeline-element {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .pipeline-element:hover {
+            transform: scale(1.05);
+        }
+        .pipeline-element a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+        .pipeline-element img {
+            max-width: 100%;
+            max-height: 80%;
+            width: auto;
+            height: auto;
+            margin-top: 10px;
+        }
+        .pipeline-element span {
+            margin-bottom: 10px;
+        }
+        @media (min-width: 1200px) {
+            .pipeline-container {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .pipeline-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        @media (max-width: 767px) {
+            .pipeline-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="container mx-auto px-4 max-w-5xl">
+    <section class="flex flex-col items-center justify-center py-10 md:py-10">
+        <h1 class="text-4xl md:text-5xl my-4 md:my-8 text-blue-600 font-extrabold font-serif"><b>Security + AI + Society</b></h1>
+        <div class="pipeline-container">
+            <div class="pipeline-element">
+                <a href="#data">
+                    <div class="spacer"></div>
+                    <img src="images/thesis/data.svg" alt="Data">
+                    <span>Data</span>
+                </a>
+            </div>
+            <div class="pipeline-element">
+                <a href="#pretraining">
+                    <div class="spacer"></div>
+                    <img src="images/thesis/pre-training.svg" alt="Pre-training">
+                    <span>Pre-training</span>
+                </a>
+            </div>
+            <div class="pipeline-element">
+                <a href="#finetuning">
+                    <div class="spacer"></div>
+                    <img src="images/thesis/fine-tuning.svg" alt="Fine-tuning">
+                    <span>Fine-tuning</span>
+                </a>
+            </div>
+            <div class="pipeline-element">
+                <a href="#inference">
+                    <div class="spacer"></div>
+                    <img src="images/thesis/inference.svg" alt="Inference">
+                    <span>Inference</span>
+                </a>
+            </div>
+            <div class="pipeline-element">
+                <a href="#retrieval">
+                    <div class="spacer"></div>
+                    <img src="images/thesis/retrieval.svg" alt="Retrieval">
+                    <span>Retrieval</span>
+                </a>
+            </div>
+            <div class="pipeline-element">
+                <a href="#evaluation">
+                    <div class="spacer"></div>
+                    <img src="images/thesis/evaluation.svg" alt="Evaluation">
+                    <span>Evaluation</span>
+                </a>
+            </div>
+            <div class="pipeline-element">
+                <a href="#actions">
+                        <div class="spacer"></div>
+                    <img src="images/thesis/actions.svg" alt="Actions">
+                    <span>Actions</span>
+                </a>
+            </div>
+            <div class="pipeline-element">
+                <a href="#credentials">
+                    <div class="spacer"></div>
+                    <img src="images/thesis/credentials.svg" alt="Credentials">
+                    <span>Credentials</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+     <!-- Section 1: Intro -->
+     <section class="flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0 py-10 md:py-10">
+        <div class="w-full md:w-1/2 flex justify-center md:mt-0">
+            <div class="">
+                <img src="images/Tobin 2024 Face.jpg" alt="Tobin's Main Profile Photo" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover">
+            </div>
+        </div>
+        <div class="md:w-1/2 mb-10 md:mb-0 text-lg flex flex-col gap-4">
+            <div class="text-center md:text-left">
+            <h2 class="text-2xl md:text-3xl font-serif font-extrabold text-blue-600"><b>Security + AI + Society</b></h2></div>
+            <p>
+                Tobin is a senior PhD candidate at MIT on a <a href="https://invest.sa.gov.au/articles/sa-student-wins-place-at-mit-and-fulbright-scholarship">Fulbright Future Scholarship</a>,
+                advised by <a href="https://en.wikipedia.org/wiki/Alex_Pentland">Sandy Pentland</a> at the <a href="https://www.media.mit.edu/research/?filter=groups">MIT Media Lab</a>. Tobin's research is focused on building privacy, verifiability, and regulatory compliance into frontier AI from first principles.
+            </p>
+            <p>
+                Tobin's work is at the intersection of security, AI, and society, spanning across fields from private data sharing to verifiable evaluations for large AI models. He has contributed to recent work on regulation of generative AI and is keenly interested in working on practically deployable solutions to solve privacy and security challenges in a changing world of technology.
+            </p>    
+        </div>
+    </section>
+</body>
+</html>
