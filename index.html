@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tobin South's Website</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/kangaroo.ico">
-    <script src="https://kit.fontawesome.com/b2ac0977be.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,13 +19,13 @@
                 <h1 class="text-4xl md:text-7xl my-4 md:my-8 text-blue-600 font-extrabold font-serif"><b><span id="gday-trigger" class="cursor-pointer">G'day</span>, I'm Tobin</b></h1>
                 <div class="text-xl md:text-3xl">
                     <div class="flex items-center space-x-4 justify-center text-3xl md:text-4xl">
-                        <a href="https://github.com/tobinsouth"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://github.com/tobinsouth" class="hover:text-blue-600"><i class="fa-brands fa-github"></i></a>
                         <a href="https://x.com/tobinsouth"><i class="fa-brands fa-x-twitter"></i></a>
                         <a href="https://www.linkedin.com/in/tobinsouth/"><i class="fa-brands fa-linkedin"></i></a>
                         <a href="https://scholar.google.com/citations?user=r5pPBFMAAAAJ&hl=en"><i class="fa-brands fa-google-scholar"></i></a>
                     </div>
-                <a href="mailto:tobin@south.fyi" class="text-blue-600">tobin@south.fyi</a>
                 </div>
+                <a href="mailto:tobin@south.fyi" class="text-blue-800 my-4 py-4" id="rotating-email">tobin@south.fyi</a>
             </div>
         </section>
 
@@ -282,6 +282,53 @@
     
 
     <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Email rotation functionality
+            const emails = [
+                'tobin@south.fyi',
+                'tobin@workos.com',
+                'tsouth@mit.edu'
+            ];
+            let currentEmailIndex = 0;
+            let emailInterval;
+            let isRotating = false;
+
+            const emailElement = document.getElementById('rotating-email');
+            
+            if (!emailElement) {
+                console.error('Email element not found!');
+                return;
+            }
+
+            function updateEmail() {
+                try {
+                    emailElement.textContent = emails[currentEmailIndex];
+                    emailElement.href = `mailto:${emails[currentEmailIndex]}`;
+                    currentEmailIndex = (currentEmailIndex + 1) % emails.length;
+                } catch (error) {
+                    console.error('Error updating email:', error);
+                }
+            }
+
+            emailElement.addEventListener('mouseenter', () => {
+                if (!isRotating) {
+                    isRotating = true;
+                    emailInterval = setInterval(updateEmail, 300);
+                }
+            });
+
+            emailElement.addEventListener('mouseleave', () => {
+                if (isRotating) {
+                    clearInterval(emailInterval);
+                    isRotating = false;
+                    currentEmailIndex = 0;
+                    emailElement.textContent = emails[0];
+                    emailElement.href = `mailto:${emails[0]}`;
+                }
+            });
+        });
+
         // Trigger the kangaroo animation
         document.getElementById('gday-trigger').addEventListener('click', createKangaroos);
 
