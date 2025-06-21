@@ -25,7 +25,17 @@
                         <a href="https://scholar.google.com/citations?user=r5pPBFMAAAAJ&hl=en"><i class="fa-brands fa-google-scholar"></i></a>
                     </div>
                 </div>
-                <a href="mailto:tobin@south.fyi" class="text-blue-800 my-4 py-4" id="rotating-email">tobin@south.fyi</a>
+                <div class="relative inline-block text-left" style="margin-top: 10px;">
+                    <a href="#" id="email-toggle" class="text-blue-800 inline-block">tsouth@stanford.edu</a>
+                    <div id="email-popup" class="hidden" style="display: none;">
+                        <p>
+                            {<a href="mailto:tobin@south.fyi" class="hover:underline">tobin@south.fyi</a>,
+                            <a href="mailto:tobin@workos.com" class="hover:underline">tobin@workos.com</a>,
+                            <a href="mailto:tsouth@mit.edu" class="hover:underline">tsouth@mit.edu</a>,
+                            <a href="mailto:tsouth@stanford.edu" class="hover:underline">tsouth@stanford.edu</a>}
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -38,7 +48,7 @@
             </div>
             <div class="md:w-1/2 mb-10 md:mb-0 text-lg flex flex-col gap-4">
                 <div class="text-center md:text-left">
-                <h2 class="text-2xl md:text-3xl font-serif font-extrabold text-blue-600"><b>Security + AI + Agents + MCP</b></h2></div>
+                <h2 class="text-2xl md:text-3xl font-serif font-extrabold text-blue-600"><b>AI Agents + MCP + Security</b></h2></div>
                 <p>
                     Tobin leads AI Agents at <a href="https://www.workos.com/">WorkOS</a> building enterprise-ready MCP & agent tools, and a research fellow at Stanford University leading research for the <a href="https://loyalagents.org/">Loyal Agents initiative</a> in HAI. Tobin completed his PhD at MIT in 2025 on "Private, Verifiable, and Auditable AI Systems", where he was a senior fellow with the <a href="https://www.e14.vc/">E14 VC fund</a>. Tobin was an Australian-American <a href="https://invest.sa.gov.au/articles/sa-student-wins-place-at-mit-and-fulbright-scholarship">Fulbright Future Scholar</a> for his time at MIT, a <a href="https://www.pivotal-research.org/">Pivotal Fellowship mentor</a>, and an author of the 2025 International AI Safety Report.
                 </p>
@@ -284,47 +294,27 @@
     <script>
         // Wait for DOM to be fully loaded
         document.addEventListener('DOMContentLoaded', function() {
-            // Email rotation functionality
-            const emails = [
-                'tobin@south.fyi',
-                'tobin@workos.com',
-                'tsouth@mit.edu'
-            ];
-            let currentEmailIndex = 0;
-            let emailInterval;
-            let isRotating = false;
+            // Email popup functionality
+            const emailToggle = document.getElementById('email-toggle');
+            const emailPopup = document.getElementById('email-popup');
 
-            const emailElement = document.getElementById('rotating-email');
-            
-            if (!emailElement) {
-                console.error('Email element not found!');
-                return;
-            }
-
-            function updateEmail() {
-                try {
-                    emailElement.textContent = emails[currentEmailIndex];
-                    emailElement.href = `mailto:${emails[currentEmailIndex]}`;
-                    currentEmailIndex = (currentEmailIndex + 1) % emails.length;
-                } catch (error) {
-                    console.error('Error updating email:', error);
-                }
-            }
-
-            emailElement.addEventListener('mouseenter', () => {
-                if (!isRotating) {
-                    isRotating = true;
-                    emailInterval = setInterval(updateEmail, 300);
+            emailToggle.addEventListener('click', function(event) {
+                event.preventDefault();
+                if (emailPopup.style.display === 'none') {
+                    emailPopup.style.display = 'block';
+                    emailToggle.style.display = 'none';
+                } else {
+                    emailPopup.style.display = 'none';
+                    emailToggle.style.display = 'inline-block';
                 }
             });
 
-            emailElement.addEventListener('mouseleave', () => {
-                if (isRotating) {
-                    clearInterval(emailInterval);
-                    isRotating = false;
-                    currentEmailIndex = 0;
-                    emailElement.textContent = emails[0];
-                    emailElement.href = `mailto:${emails[0]}`;
+            document.addEventListener('click', function(event) {
+                if (!emailToggle.contains(event.target) && !emailPopup.contains(event.target)) {
+                    emailPopup.style.display = 'none';
+                    if (emailToggle.style.display === 'none') {
+                        emailToggle.style.display = 'inline-block';
+                    }
                 }
             });
         });
