@@ -1,11 +1,20 @@
-ame: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare Pages
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: false
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - preview
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,10 +23,12 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     permissions:
       contents: read
       deployments: write
+      pull-requests: write
 
     env:
       NODE_VERSION: 20
@@ -25,25 +36,180 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Use Node ${{ env.NODE_VERSION }}
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install deps
-        run: npm ci
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        id: cache-deps
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: |
+          echo "📦 Installing dependencies..."
+          npm ci --prefer-offline --no-audit
+        env:
+          CI: true
 
       - name: Build site
-        run: npm run build
+        run: |
+          echo "🔨 Building site..."
+          npm run build
+          echo "✅ Build complete!"
+        env:
+          NODE_ENV: production
 
-      - name: Publish to Cloudflare Pages
+      - name: Verify build output
+        run: |
+          echo "🔍 Verifying build output..."
+          if [ ! -d "_site" ]; then
+            echo "❌ Error: _site directory not found!"
+            exit 1
+          fi
+          
+          # Check for essential files
+          for file in index.html robots.txt; do
+            if [ ! -f "_site/$file" ]; then
+              echo "❌ Error: _site/$file not found!"
+              exit 1
+            fi
+          done
+          
+          # Check for blog directory
+          if [ ! -d "_site/blog" ]; then
+            echo "⚠️ Warning: _site/blog directory not found!"
+          fi
+          
+          echo "📊 Build output statistics:"
+          echo "Total files: $(find _site -type f | wc -l)"
+          echo "HTML files: $(find _site -name "*.html" | wc -l)"
+          echo "Total size: $(du -sh _site | cut -f1)"
+          
+          echo "✅ Build verification complete!"
+
+      - name: Deploy to Cloudflare Pages (Production)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: cloudflare/pages-action@v1
+        id: cloudflare-deploy-prod
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ secrets.CF_PAGES_PROJECT }} # e.g. "tobin-website"
+          projectName: ${{ secrets.CF_PAGES_PROJECT }}
           directory: _site
-          # PRs become preview deployments automatically
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerVersion: '3'
+
+      - name: Deploy to Cloudflare Pages (Preview)
+        if: github.event_name == 'pull_request'
+        uses: cloudflare/pages-action@v1
+        id: cloudflare-deploy-preview
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CF_PAGES_PROJECT }}
+          directory: _site
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerVersion: '3'
+
+      - name: Add deployment comment to PR
+        if: github.event_name == 'pull_request' && steps.cloudflare-deploy-preview.outputs.url
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = '${{ steps.cloudflare-deploy-preview.outputs.url }}';
+            const environment = '${{ steps.cloudflare-deploy-preview.outputs.environment }}';
+            const alias = '${{ steps.cloudflare-deploy-preview.outputs.alias }}';
+            
+            const comment = `### 🚀 Cloudflare Pages Deployment
+            
+            **Preview URL:** ${url}
+            **Environment:** ${environment}
+            ${alias ? `**Alias:** ${alias}` : ''}
+            
+            ✅ Deployment successful!`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "### Production Deployment" >> $GITHUB_STEP_SUMMARY
+            if [ -n "${{ steps.cloudflare-deploy-prod.outputs.url }}" ]; then
+              echo "✅ **Status:** Success" >> $GITHUB_STEP_SUMMARY
+              echo "🔗 **URL:** ${{ steps.cloudflare-deploy-prod.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ **Status:** Failed or skipped" >> $GITHUB_STEP_SUMMARY
+            fi
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "### Preview Deployment" >> $GITHUB_STEP_SUMMARY
+            if [ -n "${{ steps.cloudflare-deploy-preview.outputs.url }}" ]; then
+              echo "✅ **Status:** Success" >> $GITHUB_STEP_SUMMARY
+              echo "🔗 **Preview URL:** ${{ steps.cloudflare-deploy-preview.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ **Status:** Failed or skipped" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+
+  validate-links:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    continue-on-error: true
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      
+      - name: Validate deployment
+        run: |
+          echo "🔍 Validating deployment..."
+          
+          # Wait a bit for deployment to propagate
+          sleep 30
+          
+          # Check if main site is accessible
+          SITE_URL="${{ secrets.CF_PAGES_URL || 'https://tobin.page' }}"
+          
+          echo "Checking $SITE_URL..."
+          if curl -f -s -o /dev/null -w "%{http_code}" "$SITE_URL" | grep -q "200"; then
+            echo "✅ Main site is accessible"
+          else
+            echo "⚠️ Warning: Main site returned non-200 status"
+          fi
+          
+          # Check blog
+          if curl -f -s -o /dev/null -w "%{http_code}" "$SITE_URL/blog" | grep -q -E "200|301|302"; then
+            echo "✅ Blog is accessible"
+          else
+            echo "⚠️ Warning: Blog returned unexpected status"
+          fi
