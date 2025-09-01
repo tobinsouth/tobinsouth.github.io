@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title | default: site.title }}</title>
+  <meta name="description" content="{{ description | default: site.description }}">
+  <link rel="shortcut icon" type="image/x-icon" href="/images/kangaroo.ico">
+
+  <!-- Fonts / Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Site CSS (shared with root) -->
+  <link rel="stylesheet" href="/style/output.css">
+
+  <!-- Canonical & Open Graph -->
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <meta property="og:title" content="{{ title | default: site.title }}">
+  <meta property="og:description" content="{{ description | default: site.description }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Feeds -->
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS" href="/blog/feed.xml">
+  <link rel="alternate" type="application/feed+json" title="{{ site.title }} JSON" href="/blog/feed.json">
+</head>
+<body class="container mx-auto px-4 max-w-5xl" style="font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;">
+  <header class="py-6">
+    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-600"><a href="/blog/">{{ site.title }}</a></h1>
+    <nav class="mt-2 text-lg"><a class="text-blue-800 hover:underline" href="/">← Back to tobin.fyi</a></nav>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer class="py-12 text-center text-base">
+    <p>© {{ "now" | date: "%Y" }} {{ site.author }} — <a class="text-blue-800 hover:underline" href="/blog/feed.xml">RSS</a> · <a class="text-blue-800 hover:underline" href="/blog/feed.json">JSON Feed</a></p>
+  </footer>
+</body>
+</html>

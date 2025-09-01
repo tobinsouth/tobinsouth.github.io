@@ -1,0 +1,21 @@
+---
+permalink: "feed.json"
+eleventyExcludeFromCollections: true
+---
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "{{ site.title }}",
+  "home_page_url": "{{ site.url }}/blog/",
+  "feed_url": "{{ site.url }}/blog/feed.json",
+  "items": [
+    {% for p in collections.posts %}
+    {
+      "id": "{{ site.url }}{{ p.url }}",
+      "url": "{{ site.url }}{{ p.url }}",
+      "title": {{ p.data.title | jsonify }},
+      "content_html": {{ p.templateContent | jsonify }},
+      "date_published": "{{ p.date | date_to_xmlschema }}"
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}

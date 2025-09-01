@@ -1,0 +1,9 @@
+---
+layout: base.liquid
+---
+<article class="prose lg:prose-lg max-w-none">
+  <h1 class="text-4xl md:text-5xl font-extrabold text-blue-600 mb-2">{{ title }}</h1>
+  <p class="text-sm text-gray-600 mb-8">{{ page.date | date: "%Y-%m-%d" }}</p>
+  {{ content }}
+  <p class="mt-12"><a class="text-blue-800 hover:underline" href="/blog/">← All posts</a></p>
+</article>

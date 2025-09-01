@@ -1,0 +1,22 @@
+---
+permalink: "feed.xml"
+eleventyExcludeFromCollections: true
+---
+{% assign items = collections.posts %}
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{{ site.title }}</title>
+    <link>{{ site.url }}/blog/</link>
+    <description>{{ site.description }}</description>
+    {% for p in items %}
+    <item>
+      <title>{{ p.data.title }}</title>
+      <link>{{ site.url }}{{ p.url }}</link>
+      <guid>{{ site.url }}{{ p.url }}</guid>
+      <pubDate>{{ p.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+      <description><![CDATA[{{ p.templateContent }}]]></description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "tobins-blog",
+  "scripts": {
+    "build": "mkdir -p _site && cp index.html _site/index.html && npx @11ty/eleventy --input=blog-src --output=_site/blog",
+    "dev": "npx @11ty/eleventy --serve --input=blog-src --output=_site/blog"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-plugin-rss": "^2.0.0"
+  }
+}
