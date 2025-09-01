@@ -2,8 +2,11 @@
   "private": true,
   "name": "tobins-blog",
   "scripts": {
-    "build": "mkdir -p _site && cp index.html _site/index.html && npx @11ty/eleventy --input=blog-src --output=_site/blog",
-    "dev": "npx @11ty/eleventy --serve --input=blog-src --output=_site/blog"
+    "clean": "rm -rf _site",
+    "copy-static": "mkdir -p _site && cp -r index.html robots.txt talk.html zoom.html books.html images style _site/ 2>/dev/null || true",
+    "build-blog": "npx @11ty/eleventy --input=blog-src --output=_site/blog",
+    "build": "npm run clean && npm run copy-static && npm run build-blog",
+    "dev": "npm run copy-static && npx @11ty/eleventy --serve --input=blog-src --output=_site/blog"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",

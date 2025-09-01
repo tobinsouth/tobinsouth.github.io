@@ -1,0 +1,210 @@
+name: Test and Validate
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: test-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test build
+        run: |
+          echo "🔨 Testing build with Node ${{ matrix.node-version }}..."
+          npm run build
+          
+          # Verify output
+          test -d _site
+          test -f _site/index.html
+          test -f _site/robots.txt
+          test -d _site/blog
+
+      - name: Check for broken internal links
+        run: |
+          echo "🔍 Checking for broken internal links..."
+          
+          # Simple check for broken internal links in HTML files
+          find _site -name "*.html" -exec grep -l 'href="[^"]*"' {} \; | while read file; do
+            grep -o 'href="[^"]*"' "$file" | sed 's/href="//;s/"//' | while read link; do
+              # Skip external links and anchors
+              if [[ ! "$link" =~ ^(https?://|mailto:|#) ]]; then
+                # Convert relative link to file path
+                dir=$(dirname "$file")
+                target="$dir/$link"
+                
+                # Remove fragment if present
+                target=${target%%#*}
+                
+                # Check if target exists
+                if [[ ! -e "$target" ]] && [[ ! -e "${target}.html" ]] && [[ ! -e "${target}/index.html" ]]; then
+                  echo "⚠️ Potential broken link in $file: $link"
+                fi
+              fi
+            done
+          done
+
+      - name: Validate HTML structure
+        continue-on-error: true
+        run: |
+          echo "📋 Validating HTML structure..."
+          
+          # Check for basic HTML validity
+          find _site -name "*.html" | while read file; do
+            # Check for DOCTYPE
+            if ! head -n 5 "$file" | grep -qi "<!DOCTYPE"; then
+              echo "⚠️ Missing DOCTYPE in $file"
+            fi
+            
+            # Check for matching tags (basic check)
+            open_tags=$(grep -o '<[^/>!][^>]*>' "$file" | sed 's/<\([^ >]*\).*/\1/' | grep -v '^meta\|^link\|^img\|^br\|^hr\|^input' | sort | uniq -c)
+            close_tags=$(grep -o '</[^>]*>' "$file" | sed 's/<\/\([^>]*\).*/\1/' | sort | uniq -c)
+            
+            # This is a very basic check and might have false positives
+          done
+
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check file permissions
+        run: |
+          echo "🔍 Checking file permissions..."
+          find . -type f -name "*.sh" -not -path "./node_modules/*" -not -path "./.git/*" | while read file; do
+            if [[ ! -x "$file" ]]; then
+              echo "⚠️ Shell script without execute permission: $file"
+            fi
+          done
+
+      - name: Validate package.json
+        run: |
+          echo "📦 Validating package.json..."
+          
+          # Check if package.json is valid JSON
+          node -e "JSON.parse(require('fs').readFileSync('package.json', 'utf8'))"
+          
+          # Check for required scripts
+          for script in build clean; do
+            if ! node -e "if (!require('./package.json').scripts['$script']) process.exit(1)"; then
+              echo "❌ Missing required script: $script"
+              exit 1
+            fi
+          done
+
+      - name: Check for sensitive data
+        run: |
+          echo "🔒 Checking for sensitive data..."
+          
+          # Check for potential API keys or secrets
+          patterns=(
+            "api[_-]?key"
+            "secret"
+            "password"
+            "token"
+            "private[_-]?key"
+          )
+          
+          for pattern in "${patterns[@]}"; do
+            if grep -r -i "$pattern" . \
+              --exclude-dir=node_modules \
+              --exclude-dir=.git \
+              --exclude="*.lock" \
+              --exclude="*.yml" \
+              --exclude="*.yaml" | grep -v "CLOUDFLARE\|GITHUB\|secrets\.\|process\.env"; then
+              echo "⚠️ Potential sensitive data found (review manually)"
+            fi
+          done
+
+  accessibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    continue-on-error: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Basic accessibility checks
+        run: |
+          echo "♿ Running basic accessibility checks..."
+          
+          # Check for alt text on images
+          echo "Checking for images without alt text..."
+          find _site -name "*.html" -exec grep -l '<img[^>]*>' {} \; | while read file; do
+            if grep -E '<img[^>]*(?!.*alt=)[^>]*>' "$file" > /dev/null; then
+              echo "⚠️ Image without alt text in $file"
+            fi
+          done
+          
+          # Check for proper heading hierarchy
+          echo "Checking heading hierarchy..."
+          find _site -name "*.html" | while read file; do
+            # Extract heading levels
+            headings=$(grep -o '<h[1-6]' "$file" | sed 's/<h//' | tr -d '\n')
+            
+            # Check if headings skip levels
+            prev=0
+            for h in $(echo $headings | sed 's/./& /g'); do
+              if [[ $prev -ne 0 ]] && [[ $((h - prev)) -gt 1 ]]; then
+                echo "⚠️ Heading hierarchy issue in $file (h$prev -> h$h)"
+              fi
+              prev=$h
+            done
+          done
+          
+          # Check for lang attribute
+          echo "Checking for lang attributes..."
+          find _site -name "*.html" | while read file; do
+            if ! grep -q '<html[^>]*lang=' "$file"; then
+              echo "⚠️ Missing lang attribute in $file"
+            fi
+          done

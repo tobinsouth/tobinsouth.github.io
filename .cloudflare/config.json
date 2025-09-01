@@ -1,0 +1,38 @@
+{
+  "build": {
+    "command": "npm run build",
+    "directory": "_site",
+    "environment": {
+      "NODE_VERSION": "20"
+    }
+  },
+  "headers": [
+    {
+      "source": "/*",
+      "headers": {
+        "X-Frame-Options": "DENY",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin"
+      }
+    },
+    {
+      "source": "/*.html",
+      "headers": {
+        "Cache-Control": "public, max-age=3600, s-maxage=86400"
+      }
+    },
+    {
+      "source": "/images/*",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "source": "/style/*",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    }
+  ],
+  "redirects": []
+}
