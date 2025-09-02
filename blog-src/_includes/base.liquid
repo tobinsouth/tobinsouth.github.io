@@ -7,16 +7,10 @@
   <meta name="description" content="{{ description | default: site.description }}">
   <link rel="shortcut icon" type="image/x-icon" href="/images/kangaroo.ico">
 
-  <!-- Fonts / Icons -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Site CSS (shared with root) -->
-  <link rel="stylesheet" href="/style/output.css">
-  <!-- Blog-specific CSS -->
-  <link rel="stylesheet" href="/blog/assets/blog.css">
 
   <!-- Canonical & Open Graph -->
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
@@ -24,53 +18,137 @@
   <meta property="og:description" content="{{ description | default: site.description }}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Feeds -->
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS" href="/blog/feed.xml">
-  <link rel="alternate" type="application/feed+json" title="{{ site.title }} JSON" href="/blog/feed.json">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background: linear-gradient(to bottom, #f0f9ff 0%, #ffffff 20%);
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    header {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 3rem;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    
+    header h1 a {
+      background: linear-gradient(to right, #2563eb, #1e40af);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+    
+    header p {
+      color: #6b7280;
+      font-size: 1.125rem;
+    }
+    
+    nav.back-link {
+      margin-top: 1rem;
+    }
+    
+    nav.back-link a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    nav.back-link a:hover {
+      color: #1d4ed8;
+    }
+    
+    main {
+      min-height: 400px;
+      padding-bottom: 3rem;
+    }
+    
+    footer {
+      margin-top: 5rem;
+      padding: 2rem 0;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      color: #6b7280;
+    }
+    
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+      margin: 0 1rem;
+    }
+    
+    footer a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+    
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #1e40af;
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .container {
+        padding: 0 1rem;
+      }
+    }
+  </style>
 </head>
-<body style="font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: linear-gradient(to bottom, #f0f9ff 0%, #ffffff 15%); min-height: 100vh;">
-  <div class="container mx-auto px-4 max-w-5xl">
-    <header class="py-8 md:py-12 border-b border-gray-200">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-        <div>
-          <h1 class="text-3xl md:text-5xl font-extrabold">
-            <a href="/blog/" class="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent hover:from-blue-700 hover:to-blue-900 transition-all">Tobin's Blog</a>
-          </h1>
-          <p class="text-gray-600 mt-2 text-lg">{{ site.description }}</p>
-        </div>
-        <nav class="mt-4 md:mt-0">
-          <a class="inline-flex items-center text-blue-800 hover:text-blue-600 font-medium transition-colors" href="/">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Back to main site
-          </a>
-        </nav>
-      </div>
+<body>
+  <div class="container">
+    <header>
+      <h1><a href="/blog/">Tobin's Blog</a></h1>
+      <p>{{ site.description }}</p>
+      <nav class="back-link">
+        <a href="/">← Back to main site</a>
+      </nav>
     </header>
 
-    <main class="py-8 md:py-12">
+    <main>
       {{ content }}
     </main>
 
-    <footer class="mt-20 py-12 border-t border-gray-200">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-        <p class="text-gray-600">© {{ "now" | date: "%Y" }} {{ site.author }}</p>
-        <div class="mt-4 md:mt-0 space-x-6">
-          <a class="text-blue-800 hover:text-blue-600 font-medium transition-colors" href="/blog/feed.xml">
-            <svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M3.75 3a.75.75 0 00-.75.75v.5c0 .414.336.75.75.75H4c6.075 0 11 4.925 11 11v.25c0 .414.336.75.75.75h.5a.75.75 0 00.75-.75V16C17 8.82 11.18 3 4 3h-.25z"></path>
-              <path d="M3 8.75A.75.75 0 013.75 8H4a8 8 0 018 8v.25a.75.75 0 01-.75.75h-.5a.75.75 0 01-.75-.75V16a6 6 0 00-6-6h-.25A.75.75 0 013 9.25v-.5zM7 15a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            RSS Feed
-          </a>
-          <a class="text-blue-800 hover:text-blue-600 font-medium transition-colors" href="/blog/feed.json">JSON Feed</a>
-          <a class="text-blue-800 hover:text-blue-600 font-medium transition-colors" href="https://github.com/tobinsouth">GitHub</a>
-          <a class="text-blue-800 hover:text-blue-600 font-medium transition-colors" href="https://x.com/tobinsouth">X/Twitter</a>
-        </div>
-      </div>
+    <footer>
+      <p>
+        © {{ "now" | date: "%Y" }} {{ site.author }}
+        <br>
+        <a href="/blog/feed.xml">RSS Feed</a>
+        <a href="https://github.com/tobinsouth">GitHub</a>
+        <a href="https://x.com/tobinsouth">Twitter</a>
+      </p>
     </footer>
   </div>
 </body>

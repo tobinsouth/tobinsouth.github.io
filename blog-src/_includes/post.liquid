@@ -1,39 +1,158 @@
 ---
 layout: base.liquid
 ---
-<article class="blog-post max-w-4xl mx-auto">
-  <header class="mb-10">
-    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-      {{ title }}
-    </h1>
-    <div class="flex flex-wrap items-center gap-4 text-gray-600">
-      <time datetime="{{ page.date | date: "%Y-%m-%d" }}" class="flex items-center">
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-        </svg>
-        {{ page.date | date: "%B %d, %Y" }}
-      </time>
-      {% if author %}
-      <span class="flex items-center">
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-        </svg>
-        {{ author }}
-      </span>
-      {% endif %}
-    </div>
-  </header>
+<article>
+  <style>
+    article h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #2563eb, #1e40af);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+    
+    .post-meta {
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .post-content {
+      max-width: 65ch;
+      margin: 0 auto;
+    }
+    
+    .post-content h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: #1e40af;
+    }
+    
+    .post-content h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      color: #1f2937;
+    }
+    
+    .post-content p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      color: #374151;
+    }
+    
+    .post-content ul,
+    .post-content ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      color: #374151;
+    }
+    
+    .post-content li {
+      margin-bottom: 0.5rem;
+      line-height: 1.8;
+    }
+    
+    .post-content a {
+      color: #2563eb;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    
+    .post-content a:hover {
+      color: #1d4ed8;
+    }
+    
+    .post-content code {
+      background-color: #f3f4f6;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-size: 0.875em;
+      font-family: 'Monaco', 'Courier New', monospace;
+      color: #dc2626;
+    }
+    
+    .post-content pre {
+      background-color: #1f2937;
+      color: #e5e7eb;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+    }
+    
+    .post-content pre code {
+      background: none;
+      color: #e5e7eb;
+      padding: 0;
+    }
+    
+    .post-content blockquote {
+      border-left: 4px solid #3b82f6;
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #4b5563;
+    }
+    
+    .post-content strong {
+      font-weight: 700;
+      color: #111827;
+    }
+    
+    .post-navigation {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .post-navigation a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .post-navigation a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      article h1 {
+        font-size: 2rem;
+      }
+      
+      .post-content h2 {
+        font-size: 1.5rem;
+      }
+      
+      .post-content h3 {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
   
-  <div class="prose-content">
+  <h1>{{ title }}</h1>
+  <div class="post-meta">
+    {{ page.date | date: "%B %d, %Y" }}
+    {% if author %}
+    · {{ author }}
+    {% endif %}
+  </div>
+  
+  <div class="post-content">
     {{ content }}
   </div>
   
-  <nav class="mt-16 pt-8 border-t border-gray-200">
-    <a class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors group" href="/blog/">
-      <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-      </svg>
-      Back to all posts
-    </a>
+  <nav class="post-navigation">
+    <a href="/blog/">← Back to all posts</a>
   </nav>
 </article>
