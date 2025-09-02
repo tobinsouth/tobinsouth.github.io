@@ -4,7 +4,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
 
   // Copy any static assets for the blog (images/css)
-  eleventyConfig.addPassthroughCopy("blog-src/assets");
+  eleventyConfig.addPassthroughCopy({"blog-src/assets": "blog/assets"});
 
   // Collections: all posts
   eleventyConfig.addCollection("posts", (collection) =>
@@ -13,6 +13,11 @@ module.exports = function(eleventyConfig) {
   );
 
   return {
+    dir: { 
+      input: "blog-src", 
+      output: "_site/blog", 
+      includes: "_includes" 
+    },
     templateFormats: ["md", "liquid", "njk", "html"]
   };
 };

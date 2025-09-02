@@ -2,6 +2,7 @@
 title: How to build an MCP server without going insane
 description: A guide on how to build MCP servers and what might go wrong along the way. 
 layout: post.liquid
+date: 2025-01-15
 permalink: "/{{ page.fileSlug }}/index.html"
 ---
 
