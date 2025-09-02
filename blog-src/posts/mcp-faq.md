@@ -2,8 +2,8 @@
 title: How to build an MCP server without going insane
 description: A guide on how to build MCP servers and what might go wrong along the way. 
 layout: post.liquid
-date: 2025-09-1
-permalink: "/blog/{{ page.fileSlug }}/index.html"
+date: 2025-09-01
+permalink: "/{{ page.fileSlug }}/index.html"
 ---
 
 I spend a lot of time building MCP servers with folks. It's a new protocol, frameworks are constantly changing, and it's often unclear what the right way to build or test things are. Here are some thoughts & FAQs on how I like to build servers up to date as of today.

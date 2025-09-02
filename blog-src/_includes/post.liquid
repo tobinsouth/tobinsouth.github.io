@@ -1,17 +1,39 @@
 ---
 layout: base.liquid
 ---
-<article class="blog-post">
-  <h1>{{ title }}</h1>
-  <div class="post-meta">
-    <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%B %d, %Y" }}</time>
-    {% if author %}
-    <span class="mx-2">·</span>
-    <span>{{ author }}</span>
-    {% endif %}
+<article class="blog-post max-w-4xl mx-auto">
+  <header class="mb-10">
+    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+      {{ title }}
+    </h1>
+    <div class="flex flex-wrap items-center gap-4 text-gray-600">
+      <time datetime="{{ page.date | date: "%Y-%m-%d" }}" class="flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        {{ page.date | date: "%B %d, %Y" }}
+      </time>
+      {% if author %}
+      <span class="flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+        </svg>
+        {{ author }}
+      </span>
+      {% endif %}
+    </div>
+  </header>
+  
+  <div class="prose-content">
+    {{ content }}
   </div>
-  {{ content }}
-  <nav class="mt-12 pt-8 border-t border-gray-200">
-    <a class="text-blue-800 hover:text-blue-600 font-medium transition-colors" href="/blog/">← Back to all posts</a>
+  
+  <nav class="mt-16 pt-8 border-t border-gray-200">
+    <a class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors group" href="/blog/">
+      <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      Back to all posts
+    </a>
   </nav>
 </article>

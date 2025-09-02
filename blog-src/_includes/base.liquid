@@ -30,18 +30,48 @@
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS" href="/blog/feed.xml">
   <link rel="alternate" type="application/feed+json" title="{{ site.title }} JSON" href="/blog/feed.json">
 </head>
-<body class="container mx-auto px-4 max-w-5xl" style="font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;">
-  <header class="py-6">
-    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-600"><a href="/blog/">{{ site.title }}</a></h1>
-    <nav class="mt-2 text-lg"><a class="text-blue-800 hover:underline" href="/">← Back to tobin.fyi</a></nav>
-  </header>
+<body style="font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: linear-gradient(to bottom, #f0f9ff 0%, #ffffff 15%); min-height: 100vh;">
+  <div class="container mx-auto px-4 max-w-5xl">
+    <header class="py-8 md:py-12 border-b border-gray-200">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold">
+            <a href="/blog/" class="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent hover:from-blue-700 hover:to-blue-900 transition-all">Tobin's Blog</a>
+          </h1>
+          <p class="text-gray-600 mt-2 text-lg">{{ site.description }}</p>
+        </div>
+        <nav class="mt-4 md:mt-0">
+          <a class="inline-flex items-center text-blue-800 hover:text-blue-600 font-medium transition-colors" href="/">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to main site
+          </a>
+        </nav>
+      </div>
+    </header>
 
-  <main>
-    {{ content }}
-  </main>
+    <main class="py-8 md:py-12">
+      {{ content }}
+    </main>
 
-  <footer class="py-12 text-center text-base">
-    <p>© {{ "now" | date: "%Y" }} {{ site.author }} — <a class="text-blue-800 hover:underline" href="/blog/feed.xml">RSS</a> · <a class="text-blue-800 hover:underline" href="/blog/feed.json">JSON Feed</a></p>
-  </footer>
+    <footer class="mt-20 py-12 border-t border-gray-200">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+        <p class="text-gray-600">© {{ "now" | date: "%Y" }} {{ site.author }}</p>
+        <div class="mt-4 md:mt-0 space-x-6">
+          <a class="text-blue-800 hover:text-blue-600 font-medium transition-colors" href="/blog/feed.xml">
+            <svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M3.75 3a.75.75 0 00-.75.75v.5c0 .414.336.75.75.75H4c6.075 0 11 4.925 11 11v.25c0 .414.336.75.75.75h.5a.75.75 0 00.75-.75V16C17 8.82 11.18 3 4 3h-.25z"></path>
+              <path d="M3 8.75A.75.75 0 013.75 8H4a8 8 0 018 8v.25a.75.75 0 01-.75.75h-.5a.75.75 0 01-.75-.75V16a6 6 0 00-6-6h-.25A.75.75 0 013 9.25v-.5zM7 15a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            RSS Feed
+          </a>
+          <a class="text-blue-800 hover:text-blue-600 font-medium transition-colors" href="/blog/feed.json">JSON Feed</a>
+          <a class="text-blue-800 hover:text-blue-600 font-medium transition-colors" href="https://github.com/tobinsouth">GitHub</a>
+          <a class="text-blue-800 hover:text-blue-600 font-medium transition-colors" href="https://x.com/tobinsouth">X/Twitter</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
