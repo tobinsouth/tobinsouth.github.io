@@ -1,0 +1,18 @@
+name = "tobin-fyi"
+compatibility_date = "2025-09-02"
+
+[build]
+command = "npm run build"
+
+[[build.upload]]
+format = "service-worker"
+
+[site]
+bucket = "./_site"
+
+[env.production]
+name = "tobin-fyi"
+route = "tobin.fyi/*"
+
+[env.preview]
+name = "tobin-fyi-preview"

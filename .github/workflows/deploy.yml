@@ -1,10 +1,10 @@
-ame: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches: [main]
+    branches: [master, main]
   pull_request:
-    branches: [main]
+    branches: [master, main]
   workflow_dispatch: {}
 
 concurrency:
@@ -37,13 +37,18 @@ jobs:
 
       - name: Build site
         run: npm run build
+      
+      - name: Copy static assets
+        run: |
+          cp -r style _site/
+          cp -r images _site/
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ secrets.CF_PAGES_PROJECT }} # e.g. "tobin-website"
+          projectName: tobin-fyi
           directory: _site
           # PRs become preview deployments automatically
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

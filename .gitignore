@@ -4,3 +4,9 @@ _site/
 .jekyll-metadata
 .DS_Store
 bibliography
+node_modules/
+.cache/
+.env
+.wrangler/
+dist/
+*.log
