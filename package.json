@@ -2,15 +2,20 @@
   "private": true,
   "name": "tobins-blog",
   "scripts": {
-    "build": "npm run build:site && npm run build:blog",
+    "build": "npm run lint && npm run build:site && npm run build:blog",
     "build:site": "mkdir -p _site && cp index.html _site/index.html && cp llms.txt _site/llms.txt 2>/dev/null || true",
     "build:blog": "npx @11ty/eleventy",
     "dev": "npx @11ty/eleventy --serve",
-    "deploy": "npm run build && npx wrangler pages deploy _site --project-name=tobin-fyi"
+    "deploy": "npm run build && npx wrangler pages deploy _site --project-name=tobin-fyi",
+    "lint": "npm run lint:markdown && npm run lint:html",
+    "lint:markdown": "markdownlint blog-src/**/*.md",
+    "lint:html": "htmlhint _site/**/*.html || true"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-plugin-rss": "^2.0.0",
+    "htmlhint": "^1.1.4",
+    "markdownlint-cli": "^0.37.0",
     "wrangler": "^3.0.0"
   }
 }
