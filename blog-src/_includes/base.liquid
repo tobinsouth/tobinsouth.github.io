@@ -129,27 +129,7 @@
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1><a href="/blog/">Tobin's Blog</a></h1>
-      <p>{{ site.description }}</p>
-      <nav class="back-link">
-        <a href="/">← Back to main site</a>
-      </nav>
-    </header>
-
-    <main>
-      {{ content }}
-    </main>
-
-    <footer>
-      <p>
-        © {{ "now" | date: "%Y" }} {{ site.author }}
-        <br>
-        <a href="/blog/feed.xml">RSS Feed</a>
-        <a href="https://github.com/tobinsouth">GitHub</a>
-        <a href="https://x.com/tobinsouth">Twitter</a>
-      </p>
-    </footer>
+    {{ content }}
   </div>
 </body>
 </html>

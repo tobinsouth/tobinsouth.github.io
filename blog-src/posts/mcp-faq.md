@@ -4,6 +4,7 @@ description: A guide on how to build MCP servers and what might go wrong along t
 layout: post.liquid
 date: 2025-09-01
 permalink: "/{{ page.fileSlug }}/index.html"
+author: Tobin South
 ---
 
 I spend a lot of time building MCP servers with folks. It's a new protocol, frameworks are constantly changing, and it's often unclear what the right way to build or test things are. Here are some thoughts & FAQs on how I like to build servers up to date as of today.
@@ -36,21 +37,22 @@ I spend a lot of time building MCP servers with folks. It's a new protocol, fram
 - **Refresh tokens.** Making OAuth not suck and not log you out depends on these via the `offline_access` scope. This is a client-side problem as long as you use a good Authorization Server. Clients are slowly getting better at supporting this.
 - **CI/CD or Eval.** These are both hard and important. It's evolving and I'll add more notes in later.
 - **JWT Templates:** Authkit Custom JWT templates do not currently apply to auth flows with DCR (Dynamic Client Registration). This is on the roadmap and reach out if you're interested.
-    
+
 ### Really silly bugs
+
 At some point you might just have no idea what the source of the bug could be. This could be almost anything. Just in case it's useful, here are a series of random bugs that I've seen before.
+
 - Cloudflare or another bot blocker disabling the `Claude` user agent restricting MCP connections.
-- Your AWS VPC is misconfigured. 
-- Your `/.well-known` endpoints aren't actually accessible. 
+- Your AWS VPC is misconfigured.
+- Your `/.well-known` endpoints aren't actually accessible.
 - There is a bug upstream in one of the SDKs (I often spin up a TS or Python demo with my auth server just to isolate if auth, the resource server, or the underlying SDK is the source of the issue.)
 
-
-## I want to build a client!
+## I want to build a client
 
 - This is tougher than it seems sometimes (even though it shouldn't be).
 - Use one of the off-the-shelf frameworks (mcp-use, langchain, ai0sdk) to minimize the pain.
 
-## I want to build an agent / sub-agent / A2A!
+## I want to build an agent / sub-agent / A2A
 
 - MCP is a really nice way to offload a context-processing-heavy task into a subprocess that returns minimal useful context without polluting the context window. This is the Context Protocol vision of MCP and is also my working definition of a context sub-agent (e.g., an MCP call to a process that runs an AI workflow that then returns context).
 - If you're running an LLM workflow in your MCP server tool, be careful of timeouts. You might want to think about async tools.
