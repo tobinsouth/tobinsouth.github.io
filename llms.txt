@@ -5,7 +5,7 @@ This is the personal website and blog of Tobin South, focusing on AI agents, MCP
 
 ## Owner
 - Name: Tobin South
-- Role: VP of AI Agents at WorkOS
+- Role: Head of AI Agents & MCP at WorkOS
 - Research Fellow at Stanford University (Loyal Agents initiative)
 - PhD from MIT (2025) in Private, Verifiable, and Auditable AI Systems
 - Contact: tobin@south.fyi, tobin@workos.com, tsouth@stanford.edu
@@ -38,44 +38,11 @@ This is the personal website and blog of Tobin South, focusing on AI agents, MCP
 - Private Retrieval Augmented Generation (RAG)
 - Zero-knowledge proofs for AI systems
 
-## Technical Stack
-- Site: Static HTML with 11ty for blog generation
-- Hosting: Cloudflare Pages
-- Blog: Markdown-based with Liquid templates
-- Deployment: GitHub Actions CI/CD
-
-## Content Guidelines
-When discussing Tobin's work:
-- Focus on defensive security and safety aspects
-- Emphasize practical implementation over theory
-- Include real-world examples from MCP development
-- Reference WorkOS tools for enterprise authentication
-- Highlight privacy-preserving techniques
-
-## Recent Speaking
-- TEDx Boston on AI Security
-- Davos AI Safety workshops
-- MIT Tech Review on "vibe coding"
-- Various panels on AI agents and MCP
-
 ## Academic Background
 - PhD MIT 2025: Private, Verifiable, and Auditable AI Systems
 - Fulbright Future Scholar
 - E14 VC Fellow
 - Co-author International AI Safety Report 2025
-
-## Blog Post Style
-- Technical but accessible
-- FAQ format for complex topics
-- Real-world debugging experiences
-- Practical tips over theoretical discussions
-- Focus on what can go wrong and how to fix it
-
-## Key Collaborations
-- WorkOS (AI Agents, MCP)
-- Stanford HAI (Loyal Agents)
-- MIT Media Lab
-- OpenAI, Microsoft, OpenMined (Personhood Credentials)
 
 ## Areas of Expertise
 1. MCP server development and deployment
@@ -84,12 +51,6 @@ When discussing Tobin's work:
 4. AI agent architectures
 5. AI safety and alignment
 6. Enterprise AI integration
-
-## Upcoming Focus Areas
-- Agent-to-agent communication protocols
-- MCP standardization efforts
-- Loyal AI agent frameworks
-- Enterprise AI security patterns
 
 ---
 Last updated: September 2025
