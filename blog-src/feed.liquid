@@ -12,8 +12,8 @@ eleventyExcludeFromCollections: true
     {% for p in items %}
     <item>
       <title>{{ p.data.title }}</title>
-      <link>{{ site.url }}/blog/{{ p.url }}</link>
-      <guid>{{ site.url }}/blog/{{ p.url }}</guid>
+      <link>{{ site.url }}/blog{{ p.url }}</link>
+      <guid>{{ site.url }}/blog{{ p.url }}</guid>
       <pubDate>{{ p.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
       <description><![CDATA[{{ p.templateContent }}]]></description>
     </item>

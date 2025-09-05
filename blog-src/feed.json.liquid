@@ -10,8 +10,8 @@ eleventyExcludeFromCollections: true
   "items": [
     {% for p in collections.posts %}
     {
-      "id": "{{ site.url }}/blog/{{ p.url }}",
-      "url": "{{ site.url }}/blog/{{ p.url }}",
+      "id": "{{ site.url }}/blog{{ p.url }}",
+      "url": "{{ site.url }}/blog{{ p.url }}",
       "title": {{ p.data.title | jsonify }},
       "content_html": {{ p.templateContent | jsonify }},
       "date_published": "{{ p.date | date_to_xmlschema }}"
