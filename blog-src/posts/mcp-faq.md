@@ -19,7 +19,7 @@ I spend a lot of time building MCP servers with folks. It's a new protocol, fram
 
 - I always run `npx mcp-remote <URL>` first. This tests that the server connects correctly and will handle any auth flows (and give you better errors than the inspector).
 - Add it to Cursor / VS Code / your favorite client. These give bad errors but will show you what coverage you have if your tool is exposed correctly.
-- Why not the inspector? Inspector is great with an unprotected server, but when you use an external real Authorization Server, you'll run into CORS errors, which can be painful to debug. Servers that work well with Cursor and Claude often still encounter issues when using the inspector. Use this last to make sure your MCP server is robust in the tail.
+- Why not the inspector? `npx @modelcontextprocotol/inspector` is great with an unprotected server, but when you use an external real Authorization Server, you'll run into CORS errors, which can be painful to debug. Servers that work well with Cursor and Claude often still encounter issues when using the inspector. Use this last to make sure your MCP server is robust in the tail.
 
 ## How do I add auth / API keys?
 
@@ -27,7 +27,11 @@ I spend a lot of time building MCP servers with folks. It's a new protocol, fram
 - ⚠️ Do not roll your own auth; you will regret it in 2 weeks when the spec changes again.
 - API keys are fine for devs and can be a nice DX. This is for mcp.json or coding agent stuff, not for production Claude integrations/connectors, where OAuth is a better UX for everyone.
 - If you're building a new app, just use Authkit. Just look at our customer list or MCP Night, and you can see why. It just works.
-- If you already have an existing product with user management / auth of a different kind, WorkOS offers MCP Connect, a simple OAuth proxy tool that handles MCP OAuth and allows you to keep your existing solutions.
+- If you already have an existing product with user management / auth of a different kind, WorkOS offers MCP Connect, a simple OAuth proxy tool that handles MCP OAuth and allows you to keep your existing solutions
+
+## How does user identity / RBAC interact with MCP
+- MCP is super cool in that you can show different tools to different folks depending on their user role. You can also deeply customize the functionality of the MCP in the same way you can with any web infrastructure.
+
 
 ## What issues are gonna come up?
 
@@ -38,7 +42,7 @@ I spend a lot of time building MCP servers with folks. It's a new protocol, fram
 - **CI/CD or Eval.** These are both hard and important. It's evolving and I'll add more notes in later.
 - **JWT Templates:** Authkit Custom JWT templates do not currently apply to auth flows with DCR (Dynamic Client Registration). This is on the roadmap and reach out if you're interested.
 
-### Really silly bugs
+## Really silly bugs
 
 At some point you might just have no idea what the source of the bug could be. This could be almost anything. Just in case it's useful, here are a series of random bugs that I've seen before.
 
