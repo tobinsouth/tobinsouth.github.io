@@ -4,10 +4,10 @@ layout: base.liquid
 <article>
   <style>
     article h1 {
-      font-size: 2.5rem;
+      font-size: 2.375rem;
       font-weight: 800;
       margin-bottom: 1rem;
-      background: linear-gradient(to right, #2563eb, #1e40af);
+      background: linear-gradient(to right, var(--accent-start), var(--accent-end));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -15,8 +15,9 @@ layout: base.liquid
     }
     
     .post-meta {
-      color: #6b7280;
+      color: var(--muted);
       font-size: 0.875rem;
+      font-weight: 600;
     }
     
     .post-content {
@@ -26,100 +27,104 @@ layout: base.liquid
     
     .post-content h2 {
       font-size: 1.75rem;
-      font-weight: 700;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      color: #1e40af;
+      font-weight: 800;
+      margin-top: 2.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent-end);
     }
     
     .post-content h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
-      color: #1f2937;
+      font-size: 1.375rem;
+      font-weight: 700;
+      margin-top: 1.75rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
     }
     
     .post-content p {
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-      color: #374151;
+      margin-bottom: 1.25rem;
+      line-height: 1.85;
+      color: var(--text);
     }
     
     .post-content ul,
     .post-content ol {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       padding-left: 1.5rem;
-      color: #374151;
+      color: var(--text);
     }
     
     .post-content li {
-      margin-bottom: 0.5rem;
-      line-height: 1.8;
+      margin-bottom: 0.375rem;
+      line-height: 1.85;
     }
     
     .post-content a {
-      color: #2563eb;
+      color: var(--link);
       text-decoration: underline;
       text-underline-offset: 2px;
     }
     
     .post-content a:hover {
-      color: #1d4ed8;
+      color: var(--link-hover);
     }
     
     .post-content code {
-      background-color: #f3f4f6;
+      background-color: var(--code-bg);
       padding: 0.125rem 0.375rem;
       border-radius: 0.25rem;
       font-size: 0.875em;
       font-family: 'Monaco', 'Courier New', monospace;
-      color: #dc2626;
+      color: var(--code-fg);
     }
     
     .post-content pre {
-      background-color: #1f2937;
-      color: #e5e7eb;
-      padding: 1rem;
+      background-color: var(--pre-bg);
+      color: var(--pre-fg);
+      padding: 1.25rem 1rem;
       border-radius: 0.5rem;
       overflow-x: auto;
       margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
     }
     
     .post-content pre code {
       background: none;
-      color: #e5e7eb;
+      color: inherit;
       padding: 0;
     }
     
     .post-content blockquote {
-      border-left: 4px solid #3b82f6;
-      padding-left: 1.5rem;
-      margin: 1.5rem 0;
+      border-left: 4px solid var(--accent-end);
+      padding-left: 1.25rem;
+      margin: 1.25rem 0;
       font-style: italic;
-      color: #4b5563;
+      color: var(--muted-2);
+      background: var(--card);
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
     }
     
     .post-content strong {
-      font-weight: 700;
-      color: #111827;
+      font-weight: 800;
+      color: var(--text);
     }
     
     .post-navigation {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid #e5e7eb;
-      padding-bottom: 4rem;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      padding-bottom: 3rem;
     }
     
     .post-navigation a {
-      color: #2563eb;
+      color: var(--link);
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 700;
     }
     
     .post-navigation a:hover {
-      color: #1d4ed8;
+      color: var(--link-hover);
       text-decoration: underline;
     }
     

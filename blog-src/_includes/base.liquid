@@ -7,10 +7,9 @@
   <meta name="description" content="{{ description | default: site.description }}">
   <link rel="shortcut icon" type="image/x-icon" href="/images/kangaroo.ico">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#eaf4ff" media="(prefers-color-scheme: light)">
 
   <!-- Canonical & Open Graph -->
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
@@ -22,41 +21,127 @@
   <!-- Feeds -->
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS" href="/blog/feed.xml">
   
+  <script>
+    (function() {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
+    :root {
+      --bg-gradient-start: #eaf4ff;
+      --bg-gradient-end: #ffffff;
+      --page-bg: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --muted-2: #4b5563;
+      --border: #e5e7eb;
+      --card: #ffffff;
+      --link: #2563eb;
+      --link-hover: #1d4ed8;
+      --accent-start: #2563eb;
+      --accent-end: #1e40af;
+      --code-bg: #f3f4f6;
+      --code-fg: #dc2626;
+      --pre-bg: #0f172a;
+      --pre-fg: #e5e7eb;
+      --shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      --radius: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-gradient-start: #0b1220;
+        --bg-gradient-end: #0b1220;
+        --page-bg: #0b1220;
+        --text: #e5e7eb;
+        --muted: #a1a1aa;
+        --muted-2: #cbd5e1;
+        --border: #334155;
+        --card: #0f172a;
+        --link: #60a5fa;
+        --link-hover: #93c5fd;
+        --accent-start: #60a5fa;
+        --accent-end: #3b82f6;
+        --code-bg: #111827;
+        --code-fg: #fca5a5;
+        --pre-bg: #0b1220;
+        --pre-fg: #e5e7eb;
+        --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    /* Manual override via data-theme */
+    [data-theme="light"] {
+      color-scheme: light;
+    }
+    [data-theme="dark"] {
+      --bg-gradient-start: #0b1220;
+      --bg-gradient-end: #0b1220;
+      --page-bg: #0b1220;
+      --text: #e5e7eb;
+      --muted: #a1a1aa;
+      --muted-2: #cbd5e1;
+      --border: #334155;
+      --card: #0f172a;
+      --link: #60a5fa;
+      --link-hover: #93c5fd;
+      --accent-start: #60a5fa;
+      --accent-end: #3b82f6;
+      --code-bg: #111827;
+      --code-fg: #fca5a5;
+      --pre-bg: #0b1220;
+      --pre-fg: #e5e7eb;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      color-scheme: dark;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
     
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      color: #1f2937;
-      background: linear-gradient(to bottom, #f0f9ff 0%, #ffffff 20%);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.7;
+      color: var(--text);
+      background: linear-gradient(to bottom, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 20%);
       min-height: 100vh;
+      text-rendering: optimizeLegibility;
     }
     
     .container {
-      max-width: 900px;
+      max-width: 780px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 1.25rem;
     }
     
     header {
       padding: 3rem 0 2rem;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--border);
       margin-bottom: 3rem;
     }
     
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2.375rem;
       font-weight: 800;
       margin-bottom: 0.5rem;
+      line-height: 1.15;
+      text-wrap: balance;
     }
     
     header h1 a {
-      background: linear-gradient(to right, #2563eb, #1e40af);
+      background: linear-gradient(to right, var(--accent-start), var(--accent-end));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -64,8 +149,8 @@
     }
     
     header p {
-      color: #6b7280;
-      font-size: 1.125rem;
+      color: var(--muted);
+      font-size: 1.0625rem;
     }
     
     nav.back-link {
@@ -73,16 +158,18 @@
     }
     
     nav.back-link a {
-      color: #2563eb;
+      color: var(--link);
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
     }
     
     nav.back-link a:hover {
-      color: #1d4ed8;
+      color: var(--link-hover);
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
     
     main {
@@ -93,19 +180,20 @@
     footer {
       margin-top: 5rem;
       padding: 2rem 0;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid var(--border);
       text-align: center;
-      color: #6b7280;
+      color: var(--muted);
     }
     
     footer a {
-      color: #2563eb;
+      color: var(--link);
       text-decoration: none;
       margin: 0 1rem;
+      font-weight: 600;
     }
     
     footer a:hover {
-      color: #1d4ed8;
+      color: var(--link-hover);
       text-decoration: underline;
     }
     
@@ -113,9 +201,38 @@
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 2rem;
-      color: #1e40af;
+      color: var(--accent-end);
+      text-wrap: balance;
     }
     
+    ::selection {
+      background-color: var(--accent-start);
+      color: white;
+    }
+
+    /* Floating theme toggle */
+    .theme-toggle {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 50;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      border-radius: 9999px;
+      padding: 0.5rem 0.75rem;
+      box-shadow: var(--shadow);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--link);
+    }
+
     @media (max-width: 768px) {
       header h1 {
         font-size: 2rem;
@@ -131,5 +248,31 @@
   <div class="container">
     {{ content }}
   </div>
+  <button aria-label="Toggle theme" class="theme-toggle" id="theme-toggle">
+    <span id="theme-icon" aria-hidden="true">🌙</span>
+  </button>
+  <script>
+    (function() {
+      var btn = document.getElementById('theme-toggle');
+      var icon = document.getElementById('theme-icon');
+      function applyIcon(theme) {
+        icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        try { localStorage.setItem('theme', theme); } catch (e) {}
+        applyIcon(theme);
+      }
+      function init() {
+        var current = document.documentElement.getAttribute('data-theme') || 'light';
+        applyIcon(current);
+        btn.addEventListener('click', function() {
+          var now = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          setTheme(now);
+        });
+      }
+      if (btn && icon) { init(); }
+    })();
+  </script>
 </body>
 </html>
