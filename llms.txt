@@ -1,7 +1,7 @@
 # Tobin South's Personal Website
 
 ## About
-This is the personal website and blog of Tobin South, focusing on AI agents, MCP (Model Context Protocol), security, verifiability, and AI policy.
+This is the personal website of Tobin South, focusing on AI agents, MCP (Model Context Protocol), security, verifiability, and AI policy.
 
 ## Owner
 - Name: Tobin South
@@ -11,10 +11,8 @@ This is the personal website and blog of Tobin South, focusing on AI agents, MCP
 - Contact: tobin@south.fyi, tobin@workos.com, tsouth@stanford.edu
 - Social: @tobinsouth (GitHub, X/Twitter)
 
-## Website Structure
+## Website
 - Main site: https://tobin.fyi/
-- Blog: https://tobin.fyi/blog/
-- RSS Feed: https://tobin.fyi/blog/feed.xml
 
 ## Key Topics
 - AI Agents and Multi-Agent Systems
