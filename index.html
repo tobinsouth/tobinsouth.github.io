@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tobin South - AI Agents, MCP & Security Research | Stanford & WorkOS</title>
-    <meta name="description" content="Tobin South leads AI Agents at WorkOS and researches AI safety at Stanford. PhD from MIT specializing in private, verifiable, and auditable AI systems. Expert in AI agents, Model Context Protocol (MCP), and AI security.">
-    <meta name="keywords" content="Tobin South, AI agents, MCP, Model Context Protocol, AI security, Stanford, WorkOS, MIT, AI safety, artificial intelligence, machine learning, privacy, cryptography">
+    <title>Tobin South - AI Agents, MCP & Security Research | Anthropic & Stanford</title>
+    <meta name="description" content="Tobin South works on MCP and AI agents at Anthropic and researches AI safety at Stanford. PhD from MIT specializing in private, verifiable, and auditable AI systems. Expert in AI agents, Model Context Protocol (MCP), and AI security.">
+    <meta name="keywords" content="Tobin South, AI agents, MCP, Model Context Protocol, AI security, Anthropic, Stanford, MIT, AI safety, artificial intelligence, machine learning, privacy, cryptography">
     <meta name="author" content="Tobin South">
     <link rel="canonical" href="https://tobin.fyi/">
     
@@ -13,7 +13,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tobin.fyi/">
     <meta property="og:title" content="Tobin South - AI Agents, MCP & Security Research">
-    <meta property="og:description" content="Leading AI Agents at WorkOS and AI safety research at Stanford. Expert in Model Context Protocol (MCP), AI security, and verifiable AI systems.">
+    <meta property="og:description" content="Working on MCP and AI agents at Anthropic, with AI safety research at Stanford. Expert in Model Context Protocol (MCP), AI security, and verifiable AI systems.">
     <meta property="og:image" content="https://tobin.fyi/images/Tobin 2024 Face.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="1200">
@@ -23,7 +23,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://tobin.fyi/">
     <meta property="twitter:title" content="Tobin South - AI Agents, MCP & Security Research">
-    <meta property="twitter:description" content="Leading AI Agents at WorkOS and AI safety research at Stanford. Expert in Model Context Protocol (MCP), AI security, and verifiable AI systems.">
+    <meta property="twitter:description" content="Working on MCP and AI agents at Anthropic, with AI safety research at Stanford. Expert in Model Context Protocol (MCP), AI security, and verifiable AI systems.">
     <meta property="twitter:image" content="https://tobin.fyi/images/Tobin 2024 Face.jpg">
     <meta property="twitter:creator" content="@tobinsouth">
     <meta property="twitter:site" content="@tobinsouth">
@@ -34,13 +34,27 @@
     <meta name="language" content="en-US">
     <meta name="geo.region" content="US-CA">
     <meta name="geo.placename" content="San Francisco, California">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#FDFDFE" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
     <link rel="shortcut icon" type="image/x-icon" href="images/kangaroo.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/output.css">
+    <link rel="stylesheet" href="style/theme.css">
+
+    <!-- Apply a saved theme choice before first paint to avoid a flash -->
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('theme');
+                if (theme === 'light' || theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+            } catch (e) { /* private browsing: fall back to auto */ }
+        })();
+    </script>
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -48,11 +62,11 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Tobin South",
-        "jobTitle": "Head of AI Agents & MCP",
+        "jobTitle": "MCP & AI Agents",
         "worksFor": {
             "@type": "Organization",
-            "name": "WorkOS",
-            "url": "https://www.workos.com/"
+            "name": "Anthropic",
+            "url": "https://www.anthropic.com/"
         },
         "affiliation": {
             "@type": "Organization",
@@ -73,7 +87,7 @@
         ],
         "url": "https://tobin.fyi/",
         "image": "https://tobin.fyi/images/Tobin 2024 Face.jpg",
-        "description": "AI researcher and entrepreneur leading AI Agents at WorkOS and research fellow at Stanford University. Expert in AI safety, Model Context Protocol (MCP), and verifiable AI systems.",
+        "description": "AI researcher working on MCP and AI agents at Anthropic, and research fellow at Stanford University. Expert in AI safety, Model Context Protocol (MCP), and verifiable AI systems.",
         "knowsAbout": [
             "Artificial Intelligence",
             "AI Agents",
@@ -90,7 +104,7 @@
             "https://www.linkedin.com/in/tobinsouth/",
             "https://scholar.google.com/citations?user=r5pPBFMAAAAJ&hl=en"
         ],
-        "email": "tobin@south.fyi",
+        "email": "tobin@anthropic.com",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "San Francisco",
@@ -101,6 +115,9 @@
     </script>
 </head>
 <body>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme: auto" title="Theme: auto (click to change)">
+        <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+    </button>
     <div class="container mx-auto px-4 max-w-5xl">
         <!-- Header Section -->
         <header class="flex flex-col md:flex-row items-center text-center justify-center pt-10 md:pt-30">
@@ -115,11 +132,11 @@
                     </div>
                 </div>
                 <div class="relative inline-block text-left" style="margin-top: 10px;">
-                    <a href="#" id="email-toggle" class="text-blue-800 inline-block">tsouth@stanford.edu</a>
+                    <a href="#" id="email-toggle" class="text-blue-800 inline-block">tobin@anthropic.com</a>
                     <div id="email-popup" class="hidden" style="display: none;">
                         <p>
                             {<a href="mailto:tobin@south.fyi" class="hover:underline">tobin@south.fyi</a>,
-                            <a href="mailto:tobin@workos.com" class="hover:underline">tobin@workos.com</a>,
+                            <a href="mailto:tobin@anthropic.com" class="hover:underline">tobin@anthropic.com</a>,
                             <a href="mailto:tsouth@mit.edu" class="hover:underline">tsouth@mit.edu</a>,
                             <a href="mailto:tsouth@stanford.edu" class="hover:underline">tsouth@stanford.edu</a>}
                         </p>
@@ -134,7 +151,7 @@
             <section class="flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0 py-10 md:py-10">
             <div class="w-full md:w-1/2 flex justify-center md:mt-0">
                 <div class="">
-                    <img src="images/Tobin 2024 Face.jpg" alt="Tobin South - AI researcher and Head of AI Agents at WorkOS, Stanford research fellow" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover" loading="eager">
+                    <img src="images/Tobin 2024 Face.jpg" alt="Tobin South - AI researcher working on MCP and agents at Anthropic, Stanford research fellow" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover" loading="eager">
                 </div>
             </div>
             <div class="md:w-1/2 mb-10 md:mb-0 text-lg flex flex-col gap-4">
@@ -149,10 +166,8 @@
             <div class="w-full md:w-1/2 text-lg flex flex-col gap-4">
                 <p>
                     <b class="text-blue-600">About Me:</b> I'm a recovering mega-nerd who was Valedictorian of my undergraduate where I studied Mathematics and Computer Science; a first-time startup founder (which failed, great learning experience!); and a guy who liked running a bit much.
-                    My hobbies include swing dancing (usually in Golden Gate Park), organizing an annual Davos AI Safety event, and finding the best coffee in whatever city I'm in.
-                    Before all that, I grew up in the <a href="https://www.google.com/search?q=%22Peanut+capital+of+Australia%22">"Peanut capital of Australia"</a>, 
-                    the agricultural town of <a href="https://www.google.com/maps/place/Kingaroy+QLD+4610">Kingaroy, Queensland</a>; but I consider Adelaide my real home. 
-                    Don't hesitate to reach out if you have something interesting to talk about. 
+                    Before all that, I grew up in the <a href="https://www.google.com/search?q=%22Peanut+capital+of+Australia%22">"Peanut capital of Australia"</a>,
+                    the agricultural town of <a href="https://www.google.com/maps/place/Kingaroy+QLD+4610">Kingaroy, Queensland</a>; but I consider Adelaide my real home.
                 </p>
             </div>
             <div class="w-full md:w-1/2">
@@ -387,16 +402,100 @@
             </section>
         </main>
 
-        <!-- Contact Footer -->
-        <footer class="py-20 text-center text-xl">
-            <h3 class="py-4">Reach out if you want to talk AI, agents, MCP, security, verifiability, or policy.</h3>
-            <p>If you're looking for me elsewhere, my handle is usually @tobinsouth</p>
-        </footer>
     </div>
 
     
 
     <script>
+        // Theme handling: cycles auto -> light -> dark. "auto" follows the OS
+        // via prefers-color-scheme; explicit choices persist in localStorage.
+        (function () {
+            const root = document.documentElement;
+            const toggle = document.getElementById('theme-toggle');
+            const icon = toggle.querySelector('i');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+            const MODES = ['auto', 'light', 'dark'];
+            const ICONS = { auto: 'fa-circle-half-stroke', light: 'fa-sun', dark: 'fa-moon' };
+
+            function currentMode() {
+                const t = root.getAttribute('data-theme');
+                return t === 'light' || t === 'dark' ? t : 'auto';
+            }
+
+            function effectiveTheme(mode) {
+                return mode === 'auto' ? (systemDark.matches ? 'dark' : 'light') : mode;
+            }
+
+            function syncThemeColorMeta() {
+                // Read the effective background from CSS so the browser chrome
+                // always matches the page; --bg is the single source of truth.
+                const bg = getComputedStyle(root).getPropertyValue('--bg').trim();
+                document.querySelectorAll('meta[name="theme-color"]').forEach(function (meta) {
+                    meta.content = bg;
+                });
+            }
+
+            function applyMode(mode) {
+                if (mode === 'auto') {
+                    root.removeAttribute('data-theme');
+                } else {
+                    root.setAttribute('data-theme', mode);
+                }
+                icon.className = 'fa-solid ' + ICONS[mode];
+                const label = 'Theme: ' + mode + (mode === 'auto' ? ' (' + effectiveTheme(mode) + ')' : '');
+                toggle.setAttribute('aria-label', label);
+                toggle.title = label + ' — click to change';
+                syncThemeColorMeta();
+            }
+
+            toggle.addEventListener('click', function () {
+                const next = MODES[(MODES.indexOf(currentMode()) + 1) % MODES.length];
+                try {
+                    if (next === 'auto') localStorage.removeItem('theme');
+                    else localStorage.setItem('theme', next);
+                } catch (e) { /* ignore */ }
+                applyMode(next);
+            });
+
+            function onSystemChange() {
+                if (currentMode() === 'auto') applyMode('auto');
+            }
+            if (systemDark.addEventListener) {
+                systemDark.addEventListener('change', onSystemChange);
+            } else if (systemDark.addListener) {
+                systemDark.addListener(onSystemChange); // legacy Safari
+            }
+
+            applyMode(currentMode());
+
+            // Enable color transitions only after first paint so loading the
+            // page never animates from the wrong theme.
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    root.classList.add('theme-ready');
+                });
+            });
+        })();
+
+        // Gentle reveal of sections as they scroll into view. Reduced-motion
+        // users are covered in CSS, which neutralizes .reveal entirely.
+        (function () {
+            if (!('IntersectionObserver' in window)) return;
+            const sections = document.querySelectorAll('main section');
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0 });
+            sections.forEach(function (section) {
+                section.classList.add('reveal');
+                observer.observe(section);
+            });
+        })();
+
         // Wait for DOM to be fully loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Email popup functionality

@@ -1,0 +1,252 @@
+/* ==========================================================================
+   Theme layer — loaded after output.css so its overrides win by source order.
+   Supports three modes: auto (follows the OS), light, and dark.
+   Explicit choice is stored as html[data-theme="light|dark"]; no attribute
+   means auto, where @media (prefers-color-scheme) decides.
+   ========================================================================== */
+
+:root {
+    color-scheme: light dark;
+
+    --bg: #FDFDFE;
+    --text: #1E1F24;
+    --text-muted: #999;
+    --accent: #2563eb;
+    --accent-strong: #1e40af;
+    --link: #363c59;
+    --card-bg: #E0E1E6;
+    --card-title: #1E1F24;
+    --hover-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    --media-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --toggle-bg: rgba(255, 255, 255, 0.75);
+    --toggle-border: rgba(30, 31, 36, 0.12);
+    --selection-bg: rgba(37, 99, 235, 0.18);
+    --scrollbar-thumb: rgba(30, 31, 36, 0.2);
+    --img-dim: none;
+}
+
+/* Forced light must also pin native surfaces (scrollbars, form controls)
+   to light, even when the OS prefers dark. */
+[data-theme="light"] {
+    color-scheme: light;
+}
+
+/* Dark palette, applied two ways: by explicit choice, or by OS preference
+   when no explicit choice has been made. Kept in a shared custom property
+   block via the [data-theme] attribute + media query pair below. */
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    --bg: #0d1117;
+    --text: #e6e8ee;
+    --text-muted: #8b93a7;
+    --accent: #6ea8fe;
+    --accent-strong: #8fbcff;
+    --link: #b7c3e0;
+    --card-bg: #1a212e;
+    --card-title: #e6e8ee;
+    --hover-shadow: 0 0 18px rgba(110, 168, 254, 0.18);
+    --media-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.6);
+    --toggle-bg: rgba(22, 27, 36, 0.75);
+    --toggle-border: rgba(230, 232, 238, 0.14);
+    --selection-bg: rgba(110, 168, 254, 0.3);
+    --scrollbar-thumb: rgba(230, 232, 238, 0.18);
+    --img-dim: brightness(0.88);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
+        color-scheme: dark;
+
+        --bg: #0d1117;
+        --text: #e6e8ee;
+        --text-muted: #8b93a7;
+        --accent: #6ea8fe;
+        --accent-strong: #8fbcff;
+        --link: #b7c3e0;
+        --card-bg: #1a212e;
+        --card-title: #e6e8ee;
+        --hover-shadow: 0 0 18px rgba(110, 168, 254, 0.18);
+        --media-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.6);
+        --toggle-bg: rgba(22, 27, 36, 0.75);
+        --toggle-border: rgba(230, 232, 238, 0.14);
+        --selection-bg: rgba(110, 168, 254, 0.3);
+        --scrollbar-thumb: rgba(230, 232, 238, 0.18);
+        --img-dim: brightness(0.88);
+    }
+}
+
+/* --- Re-skin the existing classes onto the variables ---------------------- */
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+a {
+    color: var(--link);
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+.text-blue-600 {
+    color: var(--accent);
+}
+
+.text-blue-800 {
+    color: var(--accent-strong);
+}
+
+.hover\:text-blue-600:hover {
+    color: var(--accent);
+}
+
+.card {
+    background-color: var(--card-bg);
+    color: var(--accent);
+}
+
+.card h3 {
+    color: var(--card-title);
+}
+
+.card:hover,
+.news-card:hover {
+    box-shadow: var(--hover-shadow);
+}
+
+.scroll-cue {
+    color: var(--text-muted);
+}
+
+.scroll-cue:hover {
+    color: var(--accent);
+}
+
+/* Override only the shadow layer so Tailwind's ring composition survives. */
+.shadow-lg {
+    --tw-shadow: var(--media-shadow);
+}
+
+/* Soften photos and videos slightly in the dark so they sit into the page. */
+img,
+video {
+    filter: var(--img-dim);
+}
+
+/* Animate the swap, but only once the page has settled (the .theme-ready
+   class is added on load) so the first paint never flashes a transition.
+   Scoped to no-preference so reduced-motion users never get it. */
+@media (prefers-reduced-motion: no-preference) {
+    html.theme-ready body,
+    html.theme-ready .card,
+    html.theme-ready a,
+    html.theme-ready .text-blue-600,
+    html.theme-ready .text-blue-800,
+    html.theme-ready img,
+    html.theme-ready video {
+        transition: background-color 0.35s ease, color 0.35s ease, filter 0.35s ease;
+    }
+}
+
+/* --- Polish that applies in both themes ----------------------------------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Breathing room at the end of the page now that the footer is gone. */
+main {
+    padding-bottom: 5rem;
+}
+
+::selection {
+    background: var(--selection-bg);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.carousel {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+    scroll-snap-type: x proximity;
+}
+
+.carousel > * {
+    scroll-snap-align: start;
+}
+
+.carousel::-webkit-scrollbar {
+    height: 6px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+}
+
+.carousel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* --- Theme toggle ---------------------------------------------------------- */
+
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 50;
+    width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid var(--toggle-border);
+    background: var(--toggle-bg);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: var(--text);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.08);
+    color: var(--accent);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Gentle section reveal; disabled entirely for reduced-motion users. */
+.reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
