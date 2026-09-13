@@ -8,7 +8,7 @@ This is the personal website of Tobin South, focusing on AI agents, MCP (Model C
 - Role: MCP & AI Agents at Anthropic
 - Research Fellow at Stanford University (Loyal Agents initiative)
 - PhD from MIT (2025) in Private, Verifiable, and Auditable AI Systems
-- Contact: tobin@anthropic.com, tobin@south.fyi, tsouth@stanford.edu
+- Contact: tobin@anthropic.com, tobin@south.fyi
 - Social: @tobinsouth (GitHub, X/Twitter)
 
 ## Website
